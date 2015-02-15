@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+    <title>petametrics</title>
+    <script type="text/javascript" src="global-frame_data/proxy.js"></script>
+    <script type="text/javascript">
+
+      var windowProxy;
+      window.onload = function() {
+        var windowProxy = new Porthole['WindowProxy']('//cdn.petametrics.com/proxy-frame.html');
+        windowProxy.addEventListener(processMessage);
+        windowProxy.post({message: "cookies", cookies: document.cookie});
+      };
+
+      var links = document.getElementsByTagName('a');
+      for (var i = 0; i < links.length; i++) {
+        var link = links[i];
+        decorateLink(link.href, link);
+      }
+
+      function processMessage(messageEvent) {
+        switch (messageEvent['data'].message) {
+          case "createCookie":
+            createCookie(messageEvent['data'].name,
+                         messageEvent['data'].value,
+                         messageEvent['data'].days);
+            break;
+          case "readCookies":
+            messageEvent['source']['post']({message: "cookies", cookies: document.cookie});
+        }
+      }
+
+      function createCookie(name,value,days) {
+          var expires = "";
+          if (days) {
+              var date = new Date();
+              date.setTime(date.getTime()+(days*24*60*60*1000));
+              expires = "; expires="+date.toGMTString();
+          }
+          document.cookie = name+"="+value+expires+"; path=/";
+      }
+      function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+      }
+
+    </script>
+  </head>
+  <body>
+</body></html>

@@ -1,0 +1,43 @@
+
+body{background: #C4C4C4; float:left; width:100%; margin:0; padding:0;}
+#wrapper {width:100%; padding: 0 ;margin:0px auto;float:left; }
+ position:relative;padding: 7px 10px 5px;margin: -20px 0 0 0; *position: static;}
+#topnavigation ul {float: left; margin: 4px 0 0 0}
+
+ul#menu {display: block; float: left; text-align: center; position: relative; width:100%; background:grey; padding:0; margin:0;}
+#menu li {  float:left;  display:block;  text-align:center;  border:none;}    
+#menu li a {display:block;  outline:0;  text-decoration:none; }  
+
+.dropdown { position:absolute;  left:-999em; /* Hides the drop down */  text-align:left;  width: 100% ;background:grey;  }
+
+
+
+#menu li:hover .dropdown {left:0px;top:19px;  z-index: 20000; }  
+#menu li .dropdown ul, #subnavigation .dropdown ul {width: 15%; margin-right: 1%; float: left;}
+#menu li .dropdown ul li , #subnavigation .dropdown ul li {color: #FFFFFF;display: block;float: none;margin: 2px 0;padding: 0;text-align: left;}
+#menu li .dropdown ul li.title , #subnavigation .dropdown ul li.title {font-size: 140%; margin: 0 0 10px 0 }
+#menu li .dropdown ul li a, #subnavigation .dropdown ul li a {color: #fff !important; font-family: Arial; font-size:100%; display:block; outline:0; padding: 2px;text-decoration:none;}
+#menu li.selected .dropdown ul li a {color: #fff !important}
+#menu li .dropdown ul li.title a, #subnavigation .dropdown ul li.title a {font-size: 100%; margin: 0 0 10px 0 }
+#menu li .dropdown ul li a:hover {background: #ca002b;text-decoration: underline;-webkit-transition: background 2s ease;
+-moz-transition: background 2s ease;
+-ms-transition: background 2s ease;
+-o-transition: background 2s ease;
+transition: background 2s ease;}
+#menu li.selected .dropdown ul li a:hover {background: #E3003B;text-decoration: underline;-webkit-transition: background 2s ease;
+-moz-transition: background 2s ease;
+-ms-transition: background 2s ease;
+-o-transition: background 2s ease;
+transition: background 2s ease;}
+
+
+#subnavigation .dropdown {left: 0;margin: -15px 0 20px;padding: 10px 30px;position: relative;top: 0;width: 940px; background: #7F0728}
+#subnavigation .dropdown ul li a:hover {background: #ca002b;text-decoration: underline;-webkit-transition: background 2s ease;
+-moz-transition: background 2s ease;
+-ms-transition: background 2s ease;
+-o-transition: background 2s ease;
+transition: background 2s ease;}
+#subnavigation .dropdown ul  {margin-top: 0;}
+
+
+

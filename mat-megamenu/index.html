@@ -1,0 +1,179 @@
+<link href="style.css" media="screen" rel="stylesheet" type="text/css">
+<link href="megamenu.css" media="screen" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="jquery.min.1.8.0.js"></script>
+<script type="text/javascript" src="megamenu.js"></script>
+
+<style>
+
+ul#topnav {width:98%; padding:1%; margin:0; background:crimson; float:left; clear:both;}
+ul#topnav li {float:left; width:5%; list-style:none;}
+ul#topnav li a.icon {background:#353535;}
+
+.megamenu {position:absolute; top:-20%; height:20%;  width:100%; float:left; opacity:0.9; }
+#settings {width:100%; height:10%; position:absolute; top:-10%; background:green;}
+.mmlist {float:left; width:10%;}
+
+#settingsMM {background:grey;}
+#mediaMM {background:aqua;}
+#pagesMM {background:black;}
+</style>
+
+<script>
+
+function MegaMenuDown(){
+	//$("#settingsMM") .animate({opacity:"1"},300);
+	$("#settingsMM").animate({top:"+=29%"},300);
+	return false;
+}
+
+function MegaMenuUp(){
+	//var tester="BLAH";
+	//$("#settingsMM") .animate({opacity:"0"},300);
+	$("#settingsMM").animate({top:"-=29%"},300);
+	return false;
+}
+
+
+function MegaMenu(click){
+	//var click = 1;
+	//document.write (click);
+	if(click = 0){
+	$("#settingsMM").animate({top:"+=29%"},300);
+	var click = 1;
+	}
+	if(click = 1){ 
+	$("#settingsMM").animate({top:"-=29%"},300);
+	var click = 0;
+	}
+}
+</script>
+
+<script>
+$("#icon").on("click", MegaMenu);
+var action = 1;
+
+function MegaMenu() {
+    if ( action == 1 ) {
+       $("#settingsMM").animate({top:"+=29%"},300);
+        action = 2;
+    } else {
+        $("#settingsMM").animate({top:"-=29%"},300);
+        action = 1;
+    }
+}
+</script>
+
+<ul id="topnav">
+	<li><a onclick="MegaMenuDown();" class="icon" href="#" title="">ICON</a></li>		
+	<li><a onclick="MegaMenuUp();"   class="icon" href="#" title="">ICON</a></li>	
+	<li><a onclick="MegaMenu();"   class="icon" href="#" title="">ICON</a></li>	
+	<li><a id="icon" onclick="MegaMenuDown();" class="icon" href="#" title="">ICON</a></li>	
+<li><a onclick="MegaMenu();"  class="icon" href="#" title="">ICON</a></li>		
+</ul>
+
+
+<div class="megamenu" id="settingsMM">
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+	
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+</div>
+
+
+<!--
+<div class="megamenu" id="mediaMM">
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+	
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+</div>
+
+<div class="megamenu" id="pagesMM">
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+	
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+	<ul class="mmlist">
+		<span href="#" title="">M1</span>
+		<li><a href="#" title="">sub 1</a></li>		
+		<li><a href="#" title="">sub 2</a></li>						
+		<li><a href="#" title="">sub 2</a></li>
+		<li><a href="#" title="">sub 2</a></li>
+	</ul>
+
+</div>
+
+-->
+
+	
+
+<!-- ABSOLUTE POSITIONED ELEMENTS
+	<div id="sign-up">
+		<span><a href="#" title=""></a></span>
+	</div>
+	<div id="cloud">
+		<span><a href="#" title=""></a></span>
+	</div>
+	<div id="kite">
+		<span><a href="#" title=""></a></span>
+	</div>
+	<div id="cloud1">
+		<span><a href="#" title=""></a></span>
+	</div>
+<!-- END: ABSOLUTE POSITIONED ELEMENTS -->

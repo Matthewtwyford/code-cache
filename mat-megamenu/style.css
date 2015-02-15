@@ -1,0 +1,25 @@
+body {background:#c4c4c4; color:#302B17; float:left; width:100%; font-size:14px; font-family:arial; margin:0; padding:0;}
+	
+	/*ANIMATIONS ============================= */
+	/* absolute positioned elements */
+	#cloud {position:absolute; top:65px; left:355px;
+			background:black no-repeat; width:73px; height:39px;}
+			#cloud span a {width:73px; height:39px; float:left; text-decoration:none;}
+	
+	#kite {position:absolute; top:50px; left:825px; 
+			background:black no-repeat; width:56px; height:95px;}		
+			#kite span a {width:56px; height:95px; float:left; text-decoration:none;}
+	
+	#sign-up {position:absolute; top:55px; left:605px;
+			background:black no-repeat; width:95px; height:85px; }
+			#sign-up span a {width:95px; height:85px; float:left; text-decoration:none; }
+	
+
+	#tweet {position:absolute; top:50px; right:0px;
+			background:black; width:92px; height:112px; }
+			#tweet span a {width:92px; height:112px; float:left; text-decoration:none; }
+	
+	#header {width:100%; height:160px;}
+
+
+

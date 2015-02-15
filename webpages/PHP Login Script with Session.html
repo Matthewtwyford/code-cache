@@ -1,0 +1,1186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><link rel="stylesheet" type="text/css" href="PHP%20Login%20Script%20with%20Session_files/M9Avzs9JzEspStQvLqnMSdUxQAgUFKWWlGSmVcIZAA.css" media="all">
+<script src="PHP%20Login%20Script%20with%20Session_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="PHP%20Login%20Script%20with%20Session_files/M9Avzs9JzEspStQvKEotKclMq4QzAA.js"></script>
+
+<title>  PHP Login Script with Session</title>
+<meta name="description" content="PHP login script is used to provide user authentication for our PHP website. This script will be executed on submitting user login details such as username/email and password. We have seen two ways of sending login details from UI to PHP login script. These are, login form submit, and PHP AJAX post. We havn’t see […]">
+<meta name="keywords" content="  PHP Login Script with Session">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://phppot.com/feed/">
+<link rel="alternate" type="text/xml" title="RSS .92" href="http://phppot.com/feed/rss/">
+<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://phppot.com/feed/atom/">
+<link rel="pingback" href="http://phppot.com/xmlrpc.php">
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-40067115-1']);
+  _gaq.push(['_setDomainName', 'phppot.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script><link rel="alternate" type="application/rss+xml" title="PHP Tutorials » PHP Login Script with Session Comments Feed" href="http://phppot.com/php/php-login-script-with-session/feed/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://phppot.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://phppot.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="PHP User Authentication with MySQL" href="http://phppot.com/php/user-authentication-using-php-and-mysql/">
+<link rel="next" title="Facebook Open Authentication in PHP" href="http://phppot.com/php/facebook-open-authentication-in-php/">
+<meta name="generator" content="WordPress 3.8.3">
+<link rel="canonical" href="http://phppot.com/php/php-login-script-with-session/">
+<link rel="shortlink" href="http://phppot.com/?p=1065">
+
+</head>
+<body>
+<div id="content" class="paper-fold">
+<div id="site_header"> 
+		<div id="hmlogo"><a href="http://phppot.com/" title="PHPPOT HOME"><img src="PHP%20Login%20Script%20with%20Session_files/phppot.png" alt="PHPPOT Home"></a></div>
+</div>
+
+<div id="tutorial-body">
+	<div id="tutorial">
+		<h1>PHP Login Script with Session</h1>	
+			
+						        <div class="heading">July 22, 2013		<div class="tutorial-navigation"><a href="http://phppot.com/php/user-authentication-using-php-and-mysql/" class="prev">Previous</a>|<a href="http://phppot.com/php/facebook-open-authentication-in-php/" class="next">Next</a></div>
+		</div>
+			<p>PHP login script is used to provide user authentication for our 
+PHP website. This script will be executed on submitting user login 
+details such as username/email and password.</p>
+<p>We have seen two ways of sending login details from UI to PHP login script. These are, <a href="http://phppot.com/php/user-authentication-using-php-and-mysql">login form submit</a>, and <a href="http://phppot.com/php/ajax-programming-with-php">PHP AJAX post</a>. We havn’t see about maintaining login status for logged in user. In this article, we are going to use <a href="http://phppot.com/php/session-vs-cookies/">PHP sessions</a> to keep user login status.</p>
+<p><img src="PHP%20Login%20Script%20with%20Session_files/php_login_script.png" alt="php_login_script" class="alignnone size-full wp-image-1070" height="200" width="169"></p>
+<h2>PHP Login Sessions</h2>
+<p>After getting login credentials from user, we need to compare with 
+database to check whether they are valid or not. If so, we need to add 
+required login information to $_SESSION <a href="http://phppot.com/php/php-globals-with-egpcs-information">super global</a> with corresponding session ids. For example, $_SESSION["member_id"], $_SESSION["display_name"].</p>
+<p>By using these login session information, we ensure that user is 
+logged in. These login session ids are preserved until the user is 
+logout. While logout, these sessions are cleared by using <a href="http://phppot.com/php/php-unlink-vs-unset/">PHP unset()</a>.</p>
+<h2>User Login Interface</h2>
+<p>First, we need to create login interface to allow user to submit authentication information. The HTML and CSS code are,</p>
+<p><strong>Login Form HTML</strong></p>
+<pre style="" class="prettyprint lang-php prettyprinted"><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+</span><span class="tag">&lt;title&gt;</span><span class="pln">User Login</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+</span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/css"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"styles.css"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+</span><span class="tag">&lt;form</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"frmUser"</span><span class="pln"> </span><span class="atn">method</span><span class="pun">=</span><span class="atv">"post"</span><span class="pln"> </span><span class="atn">action</span><span class="pun">=</span><span class="atv">""</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"message"</span><span class="tag">&gt;</span><span class="pun">&lt;?</span><span class="pln">php </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">$message</span><span class="pun">!=</span><span class="str">""</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> echo $message</span><span class="pun">;</span><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span><span class="pun">?&gt;</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;table</span><span class="pln"> </span><span class="atn">border</span><span class="pun">=</span><span class="atv">"0"</span><span class="pln"> </span><span class="atn">cellpadding</span><span class="pun">=</span><span class="atv">"10"</span><span class="pln"> </span><span class="atn">cellspacing</span><span class="pun">=</span><span class="atv">"1"</span><span class="pln"> </span><span class="atn">width</span><span class="pun">=</span><span class="atv">"500"</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"center"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tableheader"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"center"</span><span class="pln"> </span><span class="atn">colspan</span><span class="pun">=</span><span class="atv">"2"</span><span class="tag">&gt;</span><span class="pln">Enter Login Details</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tablerow"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"right"</span><span class="tag">&gt;</span><span class="pln">Username</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"userName"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tablerow"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"right"</span><span class="tag">&gt;</span><span class="pln">Password</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;td&gt;&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"password"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"password"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tableheader"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"center"</span><span class="pln"> </span><span class="atn">colspan</span><span class="pun">=</span><span class="atv">"2"</span><span class="tag">&gt;&lt;input</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"submit"</span><span class="pln"> </span><span class="atn">name</span><span class="pun">=</span><span class="atv">"submit"</span><span class="pln"> </span><span class="atn">value</span><span class="pun">=</span><span class="atv">"Submit"</span><span class="tag">&gt;&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;/table&gt;</span><span class="pln">
+</span><span class="tag">&lt;/form&gt;</span><span class="pln">
+</span><span class="tag">&lt;/body&gt;&lt;/html&gt;</span></pre>
+<p><strong>styles.css</strong></p>
+<pre style="" class="prettyprint lang-php prettyprinted"><span class="pun">.</span><span class="pln">tableheader </span><span class="pun">{</span><span class="pln">
+background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#95BEE6;</span><span class="pln">
+color</span><span class="pun">:</span><span class="pln">white</span><span class="pun">;</span><span class="pln">
+font</span><span class="pun">-</span><span class="pln">weight</span><span class="pun">:</span><span class="pln">bold</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">.</span><span class="pln">tablerow </span><span class="pun">{</span><span class="pln">
+background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#A7D6F1;</span><span class="pln">
+color</span><span class="pun">:</span><span class="pln">white</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">.</span><span class="pln">message </span><span class="pun">{</span><span class="pln">
+color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#FF0000;</span><span class="pln">
+font</span><span class="pun">-</span><span class="pln">weight</span><span class="pun">:</span><span class="pln"> bold</span><span class="pun">;</span><span class="pln">
+text</span><span class="pun">-</span><span class="pln">align</span><span class="pun">:</span><span class="pln"> center</span><span class="pun">;</span><span class="pln">
+width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100</span><span class="pun">%;</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p><strong>Login Screen</strong></p>
+<p><img src="PHP%20Login%20Script%20with%20Session_files/user_login_screen1.png" alt="user_login_screen" class="alignnone size-full wp-image-2210" height="179" width="500"></p>
+<h2>PHP Login Script</h2>
+<p>After creating user login interface, we need to write PHP script. This script will authenticate user and <a href="http://phppot.com/php/php-redirect">PHP header() to redirect</a>redirect them to their private page on successful login.</p>
+<h3>User Authentication</h3>
+<p>In this step we have to,</p>
+<ul>
+<li>get user login details sent via PHP <a href="http://phppot.com/php/php-request-methods/" title="PHP Request Methods">request methods</a> GET/POST</li>
+<li>compare user input with database to authenticate</li>
+<li>add valid authenticated user data into session</li>
+</ul>
+<h3>Login Ridirect</h3>
+<p>Once users logged in successfully, then they will be redirected to 
+the user dashboard or profile page or anything. In this example, we have
+ an dashboard page showing Welcome message with logout link. The code 
+for PHP login is,</p>
+<pre style="" class="prettyprint lang-php prettyprinted"><span class="pun">&lt;?</span><span class="pln">php</span><br><span class="pln">session_start</span><span class="pun">();</span><br><span class="pln">$message</span><span class="pun">=</span><span class="str">""</span><span class="pun">;</span><br><span class="kwd">if</span><span class="pun">(</span><span class="pln">count</span><span class="pun">(</span><span class="pln">$_POST</span><span class="pun">)&gt;</span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">$conn </span><span class="pun">=</span><span class="pln"> mysql_connect</span><span class="pun">(</span><span class="str">"localhost"</span><span class="pun">,</span><span class="str">"root"</span><span class="pun">,</span><span class="str">""</span><span class="pun">);</span><br><span class="pln">mysql_select_db</span><span class="pun">(</span><span class="str">"phppot_examples"</span><span class="pun">,</span><span class="pln">$conn</span><span class="pun">);</span><br><span class="pln">$result </span><span class="pun">=</span><span class="pln"> mysql_query</span><span class="pun">(</span><span class="str">"SELECT * FROM users WHERE user_name='"</span><span class="pln"> </span><span class="pun">.</span><span class="pln"> $_POST</span><span class="pun">[</span><span class="str">"user_name"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">.</span><span class="pln"> </span><span class="str">"' and password = '"</span><span class="pun">.</span><span class="pln"> $_POST</span><span class="pun">[</span><span class="str">"password"</span><span class="pun">].</span><span class="str">"'"</span><span class="pun">);</span><br><span class="pln">$row&nbsp; </span><span class="pun">=</span><span class="pln"> mysql_fetch_array</span><span class="pun">(</span><span class="pln">$result</span><span class="pun">);</span><br><span class="kwd">if</span><span class="pun">(</span><span class="pln">is_array</span><span class="pun">(</span><span class="pln">$row</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_id"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> $row</span><span class="pun">[</span><span class="pln">user_id</span><span class="pun">];</span><br><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_name"</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> $row</span><span class="pun">[</span><span class="pln">user_name</span><span class="pun">];</span><br><span class="pun">}</span><span class="pln"> </span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">$message </span><span class="pun">=</span><span class="pln"> </span><span class="str">"Invalid Username or Password!"</span><span class="pun">;</span><br><span class="pun">}</span><br><span class="pun">}</span><br><span class="kwd">if</span><span class="pun">(</span><span class="pln">isset</span><span class="pun">(</span><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_id"</span><span class="pun">]))</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">header</span><span class="pun">(</span><span class="str">"Location:user_dashboard.php"</span><span class="pun">);</span><br><span class="pun">}</span><br><span class="pun">?&gt;</span></pre>
+<p>We can add this code above HTML which will be executed automatically on form submit.</p>
+<p>Otherwise, we can save it as individual file with .php extension, for
+ example, login.php. And then, we need to specify this file for form 
+action.</p>
+<h3>User Dashboard</h3>
+<p>The code for dashboard page is,</p>
+<pre style="" class="prettyprint lang-php prettyprinted"><span class="pun">&lt;?</span><span class="pln">php
+session_start</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="tag">&lt;html&gt;</span><span class="pln">
+</span><span class="tag">&lt;head&gt;</span><span class="pln">
+</span><span class="tag">&lt;title&gt;</span><span class="pln">User Login</span><span class="tag">&lt;/title&gt;</span><span class="pln">
+</span><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/css"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"styles.css"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+</span><span class="tag">&lt;/head&gt;</span><span class="pln">
+</span><span class="tag">&lt;body&gt;</span><span class="pln">
+</span><span class="tag">&lt;table</span><span class="pln"> </span><span class="atn">border</span><span class="pun">=</span><span class="atv">"0"</span><span class="pln"> </span><span class="atn">cellpadding</span><span class="pun">=</span><span class="atv">"10"</span><span class="pln"> </span><span class="atn">cellspacing</span><span class="pun">=</span><span class="atv">"1"</span><span class="pln"> </span><span class="atn">width</span><span class="pun">=</span><span class="atv">"500"</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"center"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tableheader"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td</span><span class="pln"> </span><span class="atn">align</span><span class="pun">=</span><span class="atv">"center"</span><span class="tag">&gt;</span><span class="pln">User Dashboard</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;tr</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"tablerow"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;td&gt;</span><span class="pln">
+</span><span class="pun">&lt;?</span><span class="pln">php
+</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_name"</span><span class="pun">])</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+</span><span class="pun">?&gt;</span><span class="pln">
+Welcome </span><span class="pun">&lt;?</span><span class="pln">php echo $_SESSION</span><span class="pun">[</span><span class="str">"user_name"</span><span class="pun">];</span><span class="pln"> </span><span class="pun">?&gt;</span><span class="pln">. Click here to </span><span class="tag">&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"logout.php"</span><span class="pln"> </span><span class="atn">tite</span><span class="pun">=</span><span class="atv">"Logout"</span><span class="tag">&gt;</span><span class="pln">Logout.
+</span><span class="pun">&lt;?</span><span class="pln">php
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">?&gt;</span><span class="pln">
+</span><span class="tag">&lt;/td&gt;</span><span class="pln">
+</span><span class="tag">&lt;/tr&gt;</span><span class="pln">
+</span><span class="tag">&lt;/body&gt;</span><span class="pln">
+</span><span class="tag">&lt;/html&gt;</span></pre>
+<p>Welcome message in this page addresses the logged in user by their 
+name. Link logout  redirects user to logout.php and clear user login 
+session.</p>
+<p><strong>Dashboard Screen</strong></p>
+<p><img src="PHP%20Login%20Script%20with%20Session_files/user_dashboad.png" alt="user_dashboad" class="alignnone size-full wp-image-2211" height="82" width="500"></p>
+<p><strong>logout.php</strong></p>
+<pre style="" class="prettyprint lang-php prettyprinted"><span class="pun">&lt;?</span><span class="pln">php
+session_start</span><span class="pun">();</span><span class="pln">
+unset</span><span class="pun">(</span><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_id"</span><span class="pun">]);</span><span class="pln">
+unset</span><span class="pun">(</span><span class="pln">$_SESSION</span><span class="pun">[</span><span class="str">"user_name"</span><span class="pun">]);</span><span class="pln">
+header</span><span class="pun">(</span><span class="str">"Location:user_login_session.php"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">?&gt;</span></pre>
+<p id="download"><a href="http://phppot.com/wp-content/uploads/2013/07/user_login_session.zip">Download PHP Login Script with Session Source Code </a></p>
+		
+				<div class="footer-prev-next">
+		<div class="tutorial-navigation"><a href="http://phppot.com/php/user-authentication-using-php-and-mysql/" class="prev">Previous</a>|<a href="http://phppot.com/php/facebook-open-authentication-in-php/" class="next">Next</a></div>
+		</div>
+		
+<!-- Display starts here -------------------------->
+
+			<div id="comments">
+
+
+<div class="largeheading">Comments on</div>
+			<div class="largeheadinggrey">PHP Login Script with Session</div>
+
+
+			<ul class="commentlist">
+					<li class="comment even thread-even depth-1" id="li-comment-349">
+		<div id="comment-349">
+		<div class="comment-author vcard">
+			<cite class="fn">ali</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-349">
+			August 13, 2013 at 10:32 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks for sharing , it helped me a lot in my little project.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=349#respond" onclick='return addComment.moveForm("comment-349", "349", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2" id="li-comment-1140">
+		<div id="comment-1140">
+		<div class="comment-author vcard">
+			<cite class="fn">Anonymous</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1140">
+			February 12, 2014 at 6:21 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>i have error in redirecting the page</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1140#respond" onclick='return addComment.moveForm("comment-1140", "1140", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-351">
+		<div id="comment-351">
+		<div class="comment-author vcard">
+			<cite class="fn">swapnil</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-351">
+			August 13, 2013 at 3:35 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>can you pls share the sql file with download.<br>
+thx</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=351#respond" onclick='return addComment.moveForm("comment-351", "351", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-2" id="li-comment-1012">
+		<div id="comment-1012">
+		<div class="comment-author vcard">
+			<cite class="fn">Gideon Birimuye</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1012">
+			December 22, 2013 at 12:33 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi swapnil, hope you are doing great.The 
+sql file below might be of help to you, i exported it using phpMyAdmin. 
+You can copy it and save it as an sql file using any software (notepad, 
+notepad++,Dreamweaver) any that you feel comfortable with and then 
+import it in phpMyAdmin and then play with vincy’s scripts. Have fun.</p>
+<p>– phpMyAdmin SQL Dump<br>
+– version 3.2.0.1<br>
+– <a href="http://www.phpmyadmin.net/" rel="nofollow">http://www.phpmyadmin.net</a><br>
+–<br>
+– Host: localhost<br>
+– Generation Time: Dec 22, 2013 at 06:52 AM<br>
+– Server version: 5.1.36<br>
+– PHP Version: 5.3.0</p>
+<p>SET SQL_MODE=”NO_AUTO_VALUE_ON_ZERO”;</p>
+<p>–<br>
+– Database: `login_script`<br>
+–</p>
+<p>– ——————————————————–</p>
+<p>–<br>
+– Table structure for table `users`<br>
+–</p>
+<p>CREATE TABLE IF NOT EXISTS `users` (<br>
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,<br>
+  `user_name` varchar(10) NOT NULL,<br>
+  `password` varchar(3) NOT NULL,<br>
+  PRIMARY KEY (`user_id`)<br>
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;</p>
+<p>–<br>
+– Dumping data for table `users`<br>
+–</p>
+<p>INSERT INTO `users` (`user_id`, `user_name`, `password`) VALUES<br>
+(1, ‘Gideon’, ‘fox’);</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1012#respond" onclick='return addComment.moveForm("comment-1012", "1012", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even depth-2" id="li-comment-1014">
+		<div id="comment-1014">
+		<div class="comment-author vcard">
+			<cite class="fn">Gideon Birimuye</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1014">
+			December 22, 2013 at 12:46 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Swapnil remember i changed the name of the database to login_script. Keep in touch if you need more help.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1014#respond" onclick='return addComment.moveForm("comment-1014", "1014", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-394">
+		<div id="comment-394">
+		<div class="comment-author vcard">
+			<cite class="fn">Kumara</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-394">
+			August 24, 2013 at 5:17 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Great work!</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=394#respond" onclick='return addComment.moveForm("comment-394", "394", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor even depth-2" id="li-comment-396">
+		<div id="comment-396">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-396">
+			August 24, 2013 at 10:56 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thanks.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=396#respond" onclick='return addComment.moveForm("comment-396", "396", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment odd alt depth-3" id="li-comment-1078">
+		<div id="comment-1078">
+		<div class="comment-author vcard">
+			<cite class="fn">murali</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1078">
+			January 9, 2014 at 3:13 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>thank u</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1078#respond" onclick='return addComment.moveForm("comment-1078", "1078", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-436">
+		<div id="comment-436">
+		<div class="comment-author vcard">
+			<cite class="fn">Wan</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-436">
+			September 5, 2013 at 6:10 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>My fault, I am missing a row in SQL. it should be OK now.. <img src="PHP%20Login%20Script%20with%20Session_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=436#respond" onclick='return addComment.moveForm("comment-436", "436", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-435">
+		<div id="comment-435">
+		<div class="comment-author vcard">
+			<cite class="fn">Wan</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-435">
+			September 5, 2013 at 5:29 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi, the page is not redirect to dashboard.php?<br>
+atm.ssiunitek.com<br>
+user: w09<br>
+pass: 123</p>
+<p>Thanks</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=435#respond" onclick='return addComment.moveForm("comment-435", "435", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment even depth-2" id="li-comment-547">
+		<div id="comment-547">
+		<div class="comment-author vcard">
+			<cite class="fn">Doug</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-547">
+			September 29, 2013 at 6:40 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>So did we ever find out why the page does not redirect to the dashboard? I am having the same issue.</p>
+<p>TY</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=547#respond" onclick='return addComment.moveForm("comment-547", "547", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt depth-2" id="li-comment-595">
+		<div id="comment-595">
+		<div class="comment-author vcard">
+			<cite class="fn">reddell</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-595">
+			October 12, 2013 at 12:27 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Before redirect Header() function b v 
+sure that there is NO NOTHING html code Even space does matter something
+ above the redirect code</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=595#respond" onclick='return addComment.moveForm("comment-595", "595", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-503">
+		<div id="comment-503">
+		<div class="comment-author vcard">
+			<cite class="fn">Akinsola</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-503">
+			September 20, 2013 at 11:19 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>good work Vincy,<br>
+Thank you soo much</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=503#respond" onclick='return addComment.moveForm("comment-503", "503", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor odd alt depth-2" id="li-comment-510">
+		<div id="comment-510">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-510">
+			September 22, 2013 at 6:41 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Welcome.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=510#respond" onclick='return addComment.moveForm("comment-510", "510", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-514">
+		<div id="comment-514">
+		<div class="comment-author vcard">
+			<cite class="fn">kevin</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-514">
+			September 22, 2013 at 10:51 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hi,,,tnx alot…but still i have a problem 
+in connecting into the database,,,the message INVALID will always pomp 
+up…how can you advice me?</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=514#respond" onclick='return addComment.moveForm("comment-514", "514", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor odd alt depth-2" id="li-comment-518">
+		<div id="comment-518">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-518">
+			September 23, 2013 at 6:54 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Kevin,</p>
+<p>$conn = mysql_connect(“localhost”,”root”,”");</p>
+<p>Replace host,username and password specified for mysql_connect(), with your server config.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=518#respond" onclick='return addComment.moveForm("comment-518", "518", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-556">
+		<div id="comment-556">
+		<div class="comment-author vcard">
+			<cite class="fn">Lee</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-556">
+			October 2, 2013 at 10:34 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Love the tutorial, I have a problem 
+though. When I click submit it takes me to the User Dashboard but it is a
+ blank page that just says ‘User Dashboard’ at the top.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=556#respond" onclick='return addComment.moveForm("comment-556", "556", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-626">
+		<div id="comment-626">
+		<div class="comment-author vcard">
+			<cite class="fn">Kalidoss</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-626">
+			November 6, 2013 at 3:24 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi<br>
+Am Kalidoss from India.<br>
+this article very useful for me.. Thank you so much.Am always expecting your new update.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=626#respond" onclick='return addComment.moveForm("comment-626", "626", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor even depth-2" id="li-comment-627">
+		<div id="comment-627">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-627">
+			November 7, 2013 at 10:03 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Sure.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=627#respond" onclick='return addComment.moveForm("comment-627", "627", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-636">
+		<div id="comment-636">
+		<div class="comment-author vcard">
+			<cite class="fn">ragu</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-636">
+			November 17, 2013 at 7:37 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>logout session not work on mine for some 
+reason i run the code as downloaded form here so i dont know why its not
+ working. i can login in fine but its the login out thats not working</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=636#respond" onclick='return addComment.moveForm("comment-636", "636", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor even depth-2" id="li-comment-637">
+		<div id="comment-637">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-637">
+			November 18, 2013 at 11:05 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Ragu,</p>
+<p>What is happening when you logout. You receive any error?</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=637#respond" onclick='return addComment.moveForm("comment-637", "637", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt depth-2" id="li-comment-641">
+		<div id="comment-641">
+		<div class="comment-author vcard">
+			<cite class="fn">lulesu jnr</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-641">
+			November 18, 2013 at 8:54 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>give us the outcome <img src="PHP%20Login%20Script%20with%20Session_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=641#respond" onclick='return addComment.moveForm("comment-641", "641", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-640">
+		<div id="comment-640">
+		<div class="comment-author vcard">
+			<cite class="fn">lulesu jnr</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-640">
+			November 18, 2013 at 8:52 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hey dude nyc sharing i lyk it, i have bookmaked your site</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=640#respond" onclick='return addComment.moveForm("comment-640", "640", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-662">
+		<div id="comment-662">
+		<div class="comment-author vcard">
+			<cite class="fn">arun</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-662">
+			November 27, 2013 at 6:47 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hello<br>
+i have tried this code<br>
+but i am getting following warnings<br>
+1. message is not defined in<br>
+2.Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=662#respond" onclick='return addComment.moveForm("comment-662", "662", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor even depth-2" id="li-comment-664">
+		<div id="comment-664">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-664">
+			November 28, 2013 at 11:24 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Arun,</p>
+<p>@Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in</p>
+<p>This is because of query failure. Before executing this query, ensure
+ that you have users table with respective columns in database, as 
+specified in code.</p>
+<p>@message is not defined in</p>
+<p>We have to define $message before we use. Otherwise, we need to check $message whether it is set or not. For example,<br>
+if(isset($message)) echo $message;</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=664#respond" onclick='return addComment.moveForm("comment-664", "664", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-780">
+		<div id="comment-780">
+		<div class="comment-author vcard">
+			<cite class="fn">amanda</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-780">
+			December 4, 2013 at 11:01 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>This was helpful. I’ve been trying to figure this out for a few weeks and something in this clicked.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=780#respond" onclick='return addComment.moveForm("comment-780", "780", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1013">
+		<div id="comment-1013">
+		<div class="comment-author vcard">
+			<cite class="fn">Gideon Birimuye</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1013">
+			December 22, 2013 at 12:42 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Vincy thanks for the sharing, it was really helpful. keep it up.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1013#respond" onclick='return addComment.moveForm("comment-1013", "1013", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1059">
+		<div id="comment-1059">
+		<div class="comment-author vcard">
+			<cite class="fn">saiful islam</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1059">
+			December 27, 2013 at 6:17 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>i am know of ur form mining but i can’t 
+show error message in the login page($messgae variable data), when i run
+ the login form with wrong information but doesn’t show the message. The
+ message area show all time in this message(Notice: Undefined variable: 
+message in D:DIUwampwwwphptotal_loginIndia_loginformindex.php on line 9 
+). How to show check validation message in the login page. Please 
+suggest me. Thanks</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1059#respond" onclick='return addComment.moveForm("comment-1059", "1059", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1064">
+		<div id="comment-1064">
+		<div class="comment-author vcard">
+			<cite class="fn">sumit</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1064">
+			December 29, 2013 at 10:27 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi vincy.<br>
+This tutorial helped me alot .<br>
+I would now like to know how do we display the name of the user logged 
+in by hiding the login or signup button and they should reappear when 
+the used loggs out. I have gone through many sites but could not 
+understand.<br>
+Would u plz write a code that would help me?</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1064#respond" onclick='return addComment.moveForm("comment-1064", "1064", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor odd alt depth-2" id="li-comment-1067">
+		<div id="comment-1067">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1067">
+			December 30, 2013 at 5:47 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Sumit,</p>
+<p>To display logged in username instead of login button, </p>
+<p>if($_SESSTION["username"]) {<br>
+echo $_SESSTION["username"];<br>
+} else {<br>
+// display login button<br>
+}</p>
+<p>Make sure, you have stored logged in user name into a session variable while login.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1067#respond" onclick='return addComment.moveForm("comment-1067", "1067", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment even depth-3" id="li-comment-1071">
+		<div id="comment-1071">
+		<div class="comment-author vcard">
+			<cite class="fn">sumit</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1071">
+			December 31, 2013 at 4:40 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Thank you for your reply vincy,<br>
+It helped me alot<br>
+keep up the good work.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1071#respond" onclick='return addComment.moveForm("comment-1071", "1071", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1069">
+		<div id="comment-1069">
+		<div class="comment-author vcard">
+			<cite class="fn">vhinzlloyd</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1069">
+			December 31, 2013 at 7:18 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hi ,,thank u very much,,but i still have 
+problem..ive noticed when i logged out,,and press back it will got an 
+error,,like this Notice: Undefined index: user_name in 
+C:\xampp\htdocs\experiment\samplelogin\user_dashboard.php on line 18<br>
+.please help</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1069#respond" onclick='return addComment.moveForm("comment-1069", "1069", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor even depth-2" id="li-comment-1070">
+		<div id="comment-1070">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1070">
+			December 31, 2013 at 11:32 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi vhinzlloyd,</p>
+<p>If you check user_name session like,</p>
+<p>if(isset($_SESSION["user_name"])) {</p>
+<p>instead of</p>
+<p>if($_SESSION["user_name"]) {</p>
+<p>you can avoid this error notice.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1070#respond" onclick='return addComment.moveForm("comment-1070", "1070", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1072">
+		<div id="comment-1072">
+		<div class="comment-author vcard">
+			<cite class="fn">Sjoerd</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1072">
+			January 4, 2014 at 12:57 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I keep getting ‘Warning: mysql_fetch_array() expects parameter 1 to be resource, boolean given in x at line x’ </p>
+<p>How can I fix this?</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1072#respond" onclick='return addComment.moveForm("comment-1072", "1072", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-1103">
+		<div id="comment-1103">
+		<div class="comment-author vcard">
+			<cite class="fn">Anonymous</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1103">
+			January 23, 2014 at 1:37 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>SHOW DATABASES;</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1103#respond" onclick='return addComment.moveForm("comment-1103", "1103", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1113">
+		<div id="comment-1113">
+		<div class="comment-author vcard">
+			<cite class="fn">sweety</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1113">
+			January 26, 2014 at 7:05 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>thnk uuu</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1113#respond" onclick='return addComment.moveForm("comment-1113", "1113", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-1115">
+		<div id="comment-1115">
+		<div class="comment-author vcard">
+			<cite class="fn">Michał</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1115">
+			January 27, 2014 at 8:11 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Sorry but this code is simply wrong and insecure. </p>
+<p>$result = mysql_query(“SELECT * FROM users WHERE user_name=’” . 
+$_POST["user_name"] . “‘ and password = ‘”. $_POST["password"].”‘”);</p>
+<p>You should escape those posts. I can send ‘; DROP DATABASE x; ” as password and you are doomed.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1115#respond" onclick='return addComment.moveForm("comment-1115", "1115", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	<ul class="children">
+	<li class="comment byuser comment-author-vincy bypostauthor odd alt depth-2" id="li-comment-1116">
+		<div id="comment-1116">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://phppot.com/" rel="external nofollow" class="url">Vincy</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1116">
+			January 28, 2014 at 10:22 am</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi Michal,</p>
+<p>Thank you for the comment.</p>
+<p>This tutorial is just to explain login to storing user credentials into session. </p>
+<p>We can enhance this code by adding,</p>
+<ul>
+<li>Validation to avoid SQL injection.</li>
+<li>Javascript/Server side validation to prevent HTML code or other escape sequences.</li>
+<li>We can log repeated invalid login attempts to stop anonymous by IP address.</li>
+</ul>
+<p>and etc. to avoid the security risks. But it will enlarge the code and loose the focus on topic.</p>
+<p>Security is more important and let us have separate tutorials to learn how to safeguard from security risk.</p>
+<p>Thank you for raising this point.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1116#respond" onclick='return addComment.moveForm("comment-1116", "1116", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1117">
+		<div id="comment-1117">
+		<div class="comment-author vcard">
+			<cite class="fn">carlos</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1117">
+			January 28, 2014 at 8:16 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hi and thanks for the article it is simple and easy-to-understand<br>
+but i have a question here in the login redirect part line #4</p>
+<p>if(count($_POST)&gt;0)</p>
+<p>is it possible to use isset instead of count ?? thanks again.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1117#respond" onclick='return addComment.moveForm("comment-1117", "1117", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1120">
+		<div id="comment-1120">
+		<div class="comment-author vcard">
+			<cite class="fn">pravin</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1120">
+			January 29, 2014 at 7:53 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hey hi, nice article.. do u have an article on security ??</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1120#respond" onclick='return addComment.moveForm("comment-1120", "1120", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1125">
+		<div id="comment-1125">
+		<div class="comment-author vcard">
+			<cite class="fn">Himmat</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1125">
+			February 1, 2014 at 6:18 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>THANKS</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1125#respond" onclick='return addComment.moveForm("comment-1125", "1125", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1128">
+		<div id="comment-1128">
+		<div class="comment-author vcard">
+			<cite class="fn">banu</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1128">
+			February 2, 2014 at 11:24 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>hi,<br>
+can yu pls help me wid dis error<br>
+” Notice: Undefined index: user_name in C:\xampp\htdocs\b\try\application\views\scripts\index\login.php on line 16 “</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1128#respond" onclick='return addComment.moveForm("comment-1128", "1128", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1130">
+		<div id="comment-1130">
+		<div class="comment-author vcard">
+			<cite class="fn"><a href="http://korba-hosting.co.uk/" rel="external nofollow" class="url">Rich</a></cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1130">
+			February 4, 2014 at 7:24 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>Hi, im having trouble with session variable is not passing to the next page,<br>
+The code i have is very similar to yours except a few security tweaks<br>
+heres my bits n pieces</p>
+<p>//Register session variable after db check on authlogin.php page -<br>
+———————————<br>
+$_SESSION['u_name'] = “myusername”;</p>
+<p>header(“location:summary.php”);<br>
+}<br>
+else {<br>
+echo “Wrong Username or Password”;<br>
+}<br>
+———————————</p>
+<p>And to validate on the account summary page -<br>
+———————————<br>
+if($_SESSTION["u_name"]) {<br>
+echo $_SESSTION["u_name"];<br>
+} else {<br>
+	header(“location:index.php”);<br>
+}<br>
+———————————</p>
+<p>Any help is much aprecciated <img src="PHP%20Login%20Script%20with%20Session_files/icon_biggrin.gif" alt=":D" class="wp-smiley"> </p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1130#respond" onclick='return addComment.moveForm("comment-1130", "1130", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1144">
+		<div id="comment-1144">
+		<div class="comment-author vcard">
+			<cite class="fn">ron</cite> <span></span>		</div><!-- .comment-author .vcard -->
+		
+		<div class="comment-meta commentmetadata"><a href="http://phppot.com/php/php-login-script-with-session/#comment-1144">
+			February 14, 2014 at 10:34 pm</a>		</div><!-- .comment-meta .commentmetadata -->
+
+		<div class="comment-body"><p>I want ask 1 question..how to select 
+multiple table from single database to login..?example table 
+group1,group2 and group3.so what php code for this?.</p>
+</div>
+
+		<div class="reply">
+			<a class="comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/?replytocom=1144#respond" onclick='return addComment.moveForm("comment-1144", "1144", "respond", "1065")'>Reply</a>		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
+
+	</li><!-- #comment-## -->
+			</ul>
+
+
+
+
+
+
+
+								<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Add a Comment <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://phppot.com/php/php-login-script-with-session/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://phppot.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																										<p class="comment-form-author"><label for="author">Name</label> <input id="author" name="author" size="30" type="text"></p>
+<p class="comment-form-email"><label for="email">Email</label> <input id="email" name="email" size="30" type="text"></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" size="30" type="text"></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>												<p class="form-submit">
+							<input name="submit" id="submit" value="Add Comment" type="submit">
+							<input name="comment_post_ID" value="1065" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="65704992ac" type="hidden"></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+	</div>	
+<div id="tutorial-menu">
+	<div class="heading">TUTORIAL MENU</div>
+	<div id="tutorial-list">
+	<ul class="main-menu">	<li class="cat-item php-tutorial-icon"><a href="http://phppot.com/category/php/" title="View all posts filed under PHP">PHP</a>
+<ul class="sub-menu">	<li class="cat-item cat-item-59"><a href="http://phppot.com/category/php/php-introduction/" title="View all posts filed under PHP Introduction">PHP Introduction</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://phppot.com/category/php/php-basics/" title="View all posts filed under PHP Basics">PHP Basics</a>
+</li>
+	<li class="cat-item cat-item-57"><a href="http://phppot.com/category/php/types-variables-operators/" title="View all posts filed under Types, Variables &amp; Operators">Types, Variables &amp; Operators</a>
+</li>
+	<li class="cat-item cat-item-58"><a href="http://phppot.com/category/php/php-strings/" title="View all posts filed under PHP Strings">PHP Strings</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://phppot.com/category/php/php-arrays/" title="View all posts filed under PHP Arrays">PHP Arrays</a>
+</li>
+	<li class="cat-item cat-item-61"><a href="http://phppot.com/category/php/php-functions/" title="View all posts filed under PHP Functions">PHP Functions</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="http://phppot.com/category/php/php-oops/" title="View all posts filed under PHP OOPS">PHP OOPS</a>
+</li>
+	<li class="cat-item cat-item-31"><a href="http://phppot.com/category/php/php-forms/" title="View all posts filed under PHP Forms">PHP Forms</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://phppot.com/category/php/php-databases/" title="View all posts filed under PHP Databases">PHP Databases</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://phppot.com/category/php/php-sessions-and-cookies/" title="View all posts filed under PHP Sessions and Cookies">PHP Sessions and Cookies</a>
+</li>
+	<li class="cat-item cat-item-51"><a href="http://phppot.com/category/php/error-exception-handling/" title="View all posts filed under Error and Exception Handling">Error and Exception Handling</a>
+</li>
+	<li class="cat-item cat-item-36"><a href="http://phppot.com/category/php/files-and-directories/" title="View all posts filed under Files and Directories">Files and Directories</a>
+</li>
+	<li class="cat-item cat-item-45"><a href="http://phppot.com/category/php/php-date-time/" title="View all posts filed under PHP Date Time">PHP Date Time</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://phppot.com/category/php/php-graphics/" title="View all posts filed under PHP Graphics">PHP Graphics</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://phppot.com/category/php/php-xml/" title="View all posts filed under PHP XML">PHP XML</a>
+</li>
+	<li class="cat-item cat-item-62"><a href="http://phppot.com/category/php/php-code-samples/" title="View all posts filed under PHP Code Samples">PHP Code Samples</a>
+<ul class="post-list"><li><a class="post-menu" href="http://phppot.com/php/user-authentication-using-php-and-mysql/" rel="bookmark">PHP User Authentication with MySQL</a></li><li class="current-post">PHP Login Script with Session</li><li><a class="post-menu" href="http://phppot.com/php/facebook-open-authentication-in-php/" rel="bookmark">Facebook Open Authentication in PHP</a></li><li><a class="post-menu" href="http://phppot.com/php/php-change-password-script/" rel="bookmark">PHP Change Password Script</a></li><li><a class="post-menu" href="http://phppot.com/php/ajax-programming-with-php/" rel="bookmark">PHP AJAX Programming</a></li><li><a class="post-menu" href="http://phppot.com/php/php-mail/" rel="bookmark">PHP Mail</a></li><li><a class="post-menu" href="http://phppot.com/php/send-email-in-php-using-gmail-smtp/" rel="bookmark">Send Email in PHP using Gmail SMTP</a></li><li><a class="post-menu" href="http://phppot.com/php/php-curl/" rel="bookmark">PHP cURL</a></li></ul></li>
+</ul>	</li><li class="cat-item jquery-tutorial-icon"><a href="http://phppot.com/category/jquery/" title="View all posts filed under jQuery">jQuery</a>
+	</li><li class="cat-item wordpress-tutorial-icon"><a href="http://phppot.com/category/wordpress/" title="View all posts filed under Wordpress">Wordpress</a>
+	</li><li class="cat-item mysql-tutorial-icon"><a href="http://phppot.com/category/mysql/" title="View all posts filed under MySQL">MySQL</a>
+	</li><li class="cat-item css-tutorial-icon"><a href="http://phppot.com/category/css/" title="View all posts filed under CSS">CSS</a>
+	</li><li class="cat-item javascript-tutorial-icon"><a href="http://phppot.com/category/javascript/" title="View all posts filed under Javascript">Javascript</a>
+</li></ul>	</div>
+</div>
+	
+</div>
+	<div id="sidebar">
+	<div id="aboutcntnt">
+		<div class="heading">ABOUT</div>	
+		<div id="photo"><img src="PHP%20Login%20Script%20with%20Session_files/Vincy.jpg" alt="Vincy"></div>
+		<div id="aboutdesc">
+		Phppot is a tutorials site for Php and web technologies. I am Vincy and I maintain Phppot passionately.
+		<div id="contactMe">
+			<a href="mailto:vincy@phppot.com" title="Contact Me">Say hi! vincy@phppot.com</a>
+		</div>
+		</div>
+		
+	</div>
+
+<div class="hiadcomponent">
+	<div class="heading">GET EMAIL UPDATES</div>
+	<div>
+	<form action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=phppot', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true"><p>EMAIL:</p><p><input class="sleek-input" style="width:160px;" name="email" type="text"><input value="phppot" name="uri" type="hidden"><input name="loc" value="en_US" type="hidden"><input value="Subscribe" class="subscribe" type="submit"></p></form>
+	</div>
+</div>
+
+<!-- popularlinks removed -->
+
+<div class="searchform">
+	<div class="heading">SEARCH PHPPOT</div>
+	<form action="/index.php" method="get" id="search-form">
+	<input style="width:159px;padding:2px;" name="s">
+	<input id="subbutton" value="Search" type="submit">
+	</form>
+</div>
+
+</div>
+	<div id="footer">
+			<div class="largeheading">Recommended Tutorials</div>
+				<ul>
+				<li><a href="http://phppot.com/php/php-csv-file-read/">PHP CSV File Read</a></li>
+				<li><a href="http://phppot.com/php/php-ajax-image-upload/">PHP AJAX Image Upload</a></li>
+				<li><a href="http://phppot.com/php/php-login-script-with-session/">PHP Login Script with Session</a></li>
+				<li><a href="http://phppot.com/php/php-errors/">PHP Errors</a></li>
+				<li><a href="http://phppot.com/jquery/jquery-drag-and-drop/">jQuery Drag and Drop</a></li>
+				<li><a href="http://phppot.com/php/php-input-filtering/">PHP Input Filtering</a></li>
+				<li><a href="http://phppot.com/php/php-globals-with-egpcs-information/">PHP Globals with EGPCS Information</a></li>
+				<li><a href="http://phppot.com/php/dates-and-time-in-php/">Dates and Time in PHP</a></li>
+				</ul>
+	
+	<div id="footerbottom">
+		<div class="follow">	
+		<a href="https://plus.google.com/100835954832081019478/posts" title="Google Plus" target="_blank"><img src="PHP%20Login%20Script%20with%20Session_files/googleplus.png" alt="Google Plus" class="social_icon_spacing"></a>
+		<a class="facebook" href="https://www.facebook.com/pages/phppotcom/1428212654057945" title="Follow on Facebook" target="_blank"><img src="PHP%20Login%20Script%20with%20Session_files/facebook.png" alt="Follow on Facebook"></a>
+		<a class="twitter" href="http://www.twitter.com/" title="Follow on Twitter" target="_blank"><img src="PHP%20Login%20Script%20with%20Session_files/twitter.png" alt="Follow on Twitter"></a>
+		<a class="feed" href="http://phppot.com/feed/" title="Subscribe using Feed"><img src="PHP%20Login%20Script%20with%20Session_files/feed.png" alt="Subscribe using Feed"></a>	
+		</div>
+		<div id="copyright">© 2013 <a href="http://phppot.com/" title="PHPPOT HOME">phppot.com</a> is copyrighted to Vincy and may not be reproduced without permission.</div>
+			</div>
+</div>
+</div>
+
+<script>prettyPrint();</script>
+
+
+</body></html>
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk
+Page Caching using disk: enhanced
+Database Caching 3/33 queries in 0.194 seconds using disk
+Object Caching 1769/1861 objects using disk
+
+ Served from: phppot.com @ 2014-04-24 00:44:34 by W3 Total Cache -->

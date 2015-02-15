@@ -1,0 +1,70 @@
+
+ul.tabs
+{
+	margin:0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	position:left;	
+	z-index:1;
+	width: 100%;
+	background:#616161;
+	float:left;
+}
+
+ul.tabs a {color:white; text-decoration:none;}
+
+ul.tabs li
+{
+	list-style: none;
+	display: table-cell;
+	position: relative;
+	background:#353535;
+	display: block;
+	color:white;
+	float:left;
+	width:5%;
+	}
+
+ul.tabs a
+{
+	position: relative;
+	display: block;
+	float:left;
+}
+
+
+ul li 
+{
+
+}
+
+ul.dropdown
+{
+	padding: 0px;
+	background:#353535;
+	opacity:0.9;
+	overflow:hidden;
+	width:100%;
+	display: block;
+	position: absolute;
+	z-index:-1;	
+}
+
+ul.dropdown li
+{
+	margin: 0;
+	padding: 0;
+	width:100%;
+	float: none;
+	position: relative;
+	list-style: none;
+	display: block;
+}
+
+ul.dropdown li a
+{
+	overflow: hidden;
+	width:100%;
+
+}

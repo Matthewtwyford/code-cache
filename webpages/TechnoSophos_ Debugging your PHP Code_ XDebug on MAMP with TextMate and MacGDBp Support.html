@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en"><head><link media="all" href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/layers038.css" type="text/css" rel="stylesheet"><link media="all" href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/widgetbig059.css" type="text/css" rel="stylesheet"><script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/auth016.js" type="text/javascript"></script><script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/client.js" async="" type="text/javascript" id="LR1"></script><script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/layers047.js" type="text/javascript"></script><link media="all" href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/widget119.css" type="text/css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>TechnoSophos: Debugging your PHP Code: XDebug on MAMP with TextMate and MacGDBp Support</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Technology Blog of author and software developer Matt Butcher.">
+    <meta name="author" content="Matt Butcher">
+
+    <!-- Le styles -->
+    <!-- link href="/css/bootstrap.css" rel="stylesheet" -->
+    <!-- link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" -->
+    <link href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/flatly.css" rel="stylesheet">
+    <link href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/github.css" rel="stylesheet">
+    <link href="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/site.css" rel="stylesheet">
+    <link rel="shortcut icon" href="http://technosophos.com/sites/default/files/blogbuzz_favicon.png" type="image/x-icon">
+    <link rel="alternate" title="TechnoSophos" type="application/rss+xml" href="http://technosophos.com/feed.xml">
+    <script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/widgets.js" id="twitter-wjs"></script><script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/jquery.js"></script>
+  <script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/embed.js" async="" type="text/javascript"></script><script charset="UTF-8" async="" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/alfie.js"></script></head>
+  <body data-twttr-rendered="true"><iframe src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/hub.html" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrameSecure" tabindex="0" allowtransparency="true" id="twttrHubFrameSecure" frameborder="0" scrolling="no"></iframe><iframe src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/hub_002.html" style="position: absolute; top: -9999em; width: 10px; height: 10px;" name="twttrHubFrame" tabindex="0" allowtransparency="true" id="twttrHubFrame" frameborder="0" scrolling="no"></iframe>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle Navbar</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="http://technosophos.com/"><br><img src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/technosophos_logo.png" class="logo-img img-responsive" title="TechnoSophos: Technology. Wise."></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="http://technosophos.com/">Blog</a></li>
+            <li><a href="https://github.com/technosophos">GitHub</a></li>
+            <li><a href="http://www.linkedin.com/in/mattbutcher">LinkedIn</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="row" id="main-wrapper">
+
+      <div id="main" role="main" class="col-md-8">
+        <section>
+          
+            <h1>Debugging your PHP Code: XDebug on MAMP with TextMate and MacGDBp Support</h1>
+            <div class="pull-right"><span class="label label-info">Mar 16 2009</span></div>
+            <hr>
+          
+          <div class="pull-left lede-img"><a href="http://technosophos.com/"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/a_002.html"></a></div>As I see it, there are two major drawbacks to the otherwise-spectacular <a href="http://www.mamp.info/en/mamp/index.html">MAMP (MacOS Apache MySQL, PHP)</a> package (three if you count the funky directory structuring):
+
+ 1. The .h files are all missing, so PECL doesn't work very well.
+ 2. There is no debugger.
+
+The first issue is covered <a href="http://technosophos.com/content/php-5-runkit-mamp-172">elsewhere</a>. In this article, I will address the second by explaining how to setup <a href="http://xdebug.org/">XDebug</a>
+ on MAMP. XDebug is one of the two popular PHP debugging engines (With 
+ZendDB being the other). 
+
+In this article we will cover the following:
+
+ - Getting and installing XDebug
+ - Using XDebug for basic stack tracing
+ - Integrating XDebug with TextMate
+ - Configuring XDebug and MacGDBp for client/server debugging
+ - Using MacGDBp
+
+By the end of this article, you should be able to successfully debug PHP
+ applications running on your local MAMP server.
+
+Initially, I was going to re-build PHP from source and then build the 
+PECL module for XDebug. However, I have happily discovered that this is 
+not necessary. ActiveState has <a href="http://aspn.activestate.com/ASPN/Downloads/Komodo/RemoteDebugging">binary packages</a> of XDebug for Mac OS X available for free from their website!
+
+At the time of this writing, the ActiveState package contains XDebug 2.1.0-dev.
+
+<strong>Unpack the Debugger</strong>
+Grab a copy of the latest debugger from ActiveState, and then untar it. 
+You will get a directory named something like this:
+
+~~~
+Komodo-PHPRemoteDebugging-5.1.0-alpha1-26259-macosx-x86/
+~~~
+
+
+Go into that directory. Inside of that directory, there are several 
+numbered subdirectories, correlated with the version numbers of various 
+PHP releases. MAMP uses PHP 5.2:
+
+~~~
+$ cd Komodo-PHPRemoteDebugging-5.1.0-alpha1-26259-macosx-x86/
+$ cd 5.2
+~~~
+
+
+Now we need to copy the <code>xdebug.so</code> file to the correct location within MAMP:
+
+~~~
+$ cp 5.2/xdebug.so /Applications/MAMP/bin/php5/lib/php/extensions/no-debug-non-zts-20050922/
+~~~
+
+
+Now we have XDebug's shared object file in the correct place. The next step is to configure it.
+
+<strong>Configuring XDebug</strong>
+
+Next, configure PHP to load the xdebug module in the PHP ini file (<code>php.ini</code>). This file is
+located in <code>/Applications/MAMP/conf/php5/</code>.
+
+Near the end of the file, you will need to add a couple of lines like this:
+
+~~~ ini
+[xdebug]
+zend_extension=/Applications/MAMP/bin/php5/lib/php/extensions/no-debug-non-zts-20050922/xdebug.so
+xdebug.file_link_format="txmt://open?url=file://%f&amp;line=%1"  
+~~~
+
+
+This defines a new extension (<code>xdebug</code>) and points PHP to the extension's shared object file.
+
+The last line of the code above is optional. It tells xdebug to use <a href="http://macromates.com/">TextMate</a> to open files for viewing.
+
+<strong>UPDATE:</strong> As sdboyer points out in the comments below, 
+the Zend Optimizer, turned on by default in MAMP, must be disabled for 
+XDebug to function correctly. Comment out the following lines in <code>php.ini</code>
+
+
+~~~ ini
+;zend_optimizer.optimization_level=15
+;zend_extension_manager.optimizer=/Applications/MAMP/bin/php5/zend/lib/Optimizer-3.3.3
+;zend_optimizer.version=3.3.3
+~~~
+
+
+Restart
+ MAMP. The debugger should now be installed. The next time you get an 
+error, XDebug will display a message that looks something like this:
+<div class="pull-left lede-img"><a href="http://technosophos.com/sites/default/files/images/xdebug-example-st.gif"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/xdebug-example-st.gif"></a></div>
+
+<p>In just a moment, we will take a detailed look at such errors.</p>
+
+<p><strong>Using XDebug</strong></p>
+
+<p>XDebug provides a number of facilities that you may find useful. It 
+can produce code coverage reports, performance analyses, and detailed 
+debugging messages.</p>
+
+<p>But the first thing you are likely to notice is XDebug's stack trace messages.</p>
+
+<p>Once you have XDebug installed as described above, the next time a 
+PHP error occurs on your server you will notice something new. The 
+old-style PHP errors and warnings are gone. Instead of seeing "<strong>PHP Error:</strong> Some message in somefile.php" you will get a detailed stack trace.</p>
+
+<p>Let's take a look at an example. Here is a broken PHP script:</p>
+<pre class="highlight php">  <span class="cp">&lt;?php</span>
+  <span class="k">require</span> <span class="s1">'tweet/QueryPath/QueryPath.php'</span><span class="p">;</span>
+
+  <span class="nx">qp</span><span class="p">(</span><span class="nx">QueryPath</span><span class="o">::</span><span class="na">HTML_STUB</span><span class="p">,</span> <span class="s1">'body'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'&lt;p&gt;Test&lt;/b&gt;'</span><span class="p">);</span>
+  <span class="cp">?&gt;</span>
+</pre>
+<p>The error in the script above is that the HTML passed into the <code>append()</code> function has mismatched tags. (Visit <a href="http://querypath.org/">QueryPath.org</a> for more info on the QueryPath library.)</p>
+
+<p>Here's a partial view of wheat XDebug generates when the above script is run:</p>
+
+<div class="pull-left lede-img"><a href="http://technosophos.com/sites/default/files/images/xdebug-example-st.gif"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/xdebug-example-st.gif"></a></div>
+
+<p>This colorful table provides a wealth of information about the error.
+ At the top, it shows the error message. Then it shows the stack trace, 
+which is (roughly speaking) the list of functions from outermost to 
+innermost that were currently being called when the script erred. </p>
+
+<p>In other words, we can tell from the stack trace that {main} (the main script) was executing. It called <code>QueryPathImpl-&gt;append()</code> at line 4, which in turn called <code>QueryPathImpl-&gt;prepareInsert()</code> at line 416 of QueryPathImpl.php. That, in turn, called <code>DomDocumentFragment-&gt;append()</code> on line 650 of QueryPathImpl.php.</p>
+
+<p>Using this information, we can pinpoint where the error happened. The code caused an error when <code>DomDocumentFragment-&gt;append()</code>
+ parsed the broken piece of HTML. By following the stack trace from top 
+to bottom, we can pinpoint (in our code) what the cause of these 
+circumstances was. In our case, of course, it was our passing of a badly
+ formed XML fragment.</p>
+
+<p>Stack traces can provide a greater level of detail, making many bugs 
+much easier to find. But sometimes you need (or want) to know more about
+ what is going on behind the scenes. That's where a client-side debugger
+ can really come in handy.</p>
+
+<p><strong>Hooking XDebug to a GUI Debugger</strong></p>
+
+<p>Many PHP IDEs provide integration with the XDebug debugger. But to 
+use such debuggers, you will need to use the IDE for your projects. But 
+sometimes a hefty IDE is not the best application development 
+environment. Some developers (myself included) prefer lighter-weight 
+editors like <code>vi</code>, TextMate, Coda, and BBEdit. In these 
+cases, an integrated IDE may not be an attractive or realistic 
+proposition. Fortunately, there is a solution that fits this problem.</p>
+
+<p>There are also stand-alone clients that provide simple debugging interfaces. In this section, we will look at the <a href="http://www.bluestatic.org/software/macgdbp/">MacGDBp</a> debugger, a simple tool for debugging.</p>
+
+<p>MacGDBp provides a basic debugging interface. It does not provide 
+performance testing or coverage analysis. Rather, it simply provides a 
+front-end for stepping through PHP code as it executes. Of course, this 
+is the most commonly used feature of a debugger. It provides a visual 
+interface for viewing code and setting/clearing breakpoints, as well as 
+common debugging features. Later, we will look at the interface in more 
+detail.</p>
+
+<p>You can download the latest version of MacGDBp at <a href="http://www.bluestatic.org/">http://www.bluestatic.org</a>.</p>
+
+<p>When a debugging client is used with XDebug, there is some extra 
+configuration which must be done. XDebug must be configured to 
+communicate with an external debugging client. And, of course, the 
+client must be configured to communicate with XDebug. Let's take a look 
+at this configuration, which is particularly easy for MacGDBp and 
+XDebug.</p>
+
+<p><strong>Configuring the Server</strong></p>
+
+<p>The first step is to configure the <code>php.ini</code> file to allow XDebug to connect to debugging clients. We will need to revisit the same section of <code>php.ini</code> that we created above. What we need to do there is tell the debugger that we now want it to send debugging messages to MacDBGp.</p>
+
+<p>Here's the relevant section of the <code>php.ini</code> file:</p>
+<pre class="highlight text">  [xdebug]
+  zend_extension=/Applications/MAMP/bin/php5/lib/php/extensions/no-debug-non-zts-20050922/xdebug.so
+  xdebug.remote_enable = On
+  xdebug.remote_autostart = 1
+</pre>
+<p>The first two lines remain the same. But we add two new parameters:</p>
+
+<ul>
+<li><code>xdebug.remote_enable</code>: This tells the PHP Apache module that we want to use remote debugging.</li>
+<li><code>xdebug.remote_autostart</code>: This tells PHP that we want it to immediately try to connect itself to a debugger as soon as it initializes.</li>
+</ul>
+
+<p>The second directive is not necessary, and MacGDBp can be used 
+without it. But in my experience, it performs better with auto-start 
+turned on. <strong>Do not do this on a production server</strong>. This configuration should only be used on a development server on a secure network.</p>
+
+<p>With this configuration, XDebug will attempt to connect to a debugger running on port 9000 of the localhost.</p>
+
+<p>There are other configuration options for XDebug. You may want to check out the <a href="http://xdebug.org/docs/remote">XDebug manual</a>
+ to learn about other supported configuration options. But what we have 
+enabled here is sufficient for general debugging on a local workstation 
+running MAMP and MacGDBp. <em>This configuration <strong>will</strong> support HTTP POST operations.</em></p>
+
+<p>Make sure you restart MAMP so that these changes take place.</p>
+
+<p><strong>Configuring MacGDBp</strong></p>
+
+<p>Configuring MacGDBp is even easier than the PHP configuration.</p>
+
+<p>Once you have MacGDBp installed, simply open it up. You may want to 
+change the IDE key (a shared key that the debugging server and debugging
+ client both use). To do this, go to the <strong>MacGDBp &gt; Preferences</strong> menu and change the key there. I will be using the default key, <code>macgdbp</code>.</p>
+
+<p>That's all there is to it. The defaults for MacGDBp should be sufficient for our needs.</p>
+
+<p><strong>Starting a Debug Session</strong></p>
+
+<p>Now that we have a configured server and a listening client, we are 
+ready to give this a test run. I will use the same script I began with:</p>
+<pre class="highlight php">  <span class="cp">&lt;?php</span>
+  <span class="k">require</span> <span class="s1">'tweet/QueryPath/QueryPath.php'</span><span class="p">;</span>
+
+
+  <span class="nx">qp</span><span class="p">(</span><span class="nx">QueryPath</span><span class="o">::</span><span class="na">HTML_STUB</span><span class="p">,</span> <span class="s1">'body'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">append</span><span class="p">(</span><span class="s1">'&lt;p&gt;Test&lt;/b&gt;'</span><span class="p">);</span>
+  <span class="cp">?&gt;</span>
+</pre>
+<p>In my browser, I will type in the appropriate URL: <code><a href="http://localhost:8888/err.php">http://localhost:8888/err.php</a></code></p>
+
+<p>(Note: If you do not turn on <code>xdebug.remote<em>autostart</em></code><em> in <code>php.ini</code>, you will have to add the URL parameter: <code>?XDEBUG</code></em><code>SESSION_START=macgdbp</code> to get it to start.)</p>
+
+<p>The page will not immediately load. In fact, the browser will sit 
+there waiting for the server until it times out. How come? Because the 
+server is waiting on the debugger.</p>
+
+<p>When debugging code, the server awaits the instructions of the 
+debugging client. After loading the code, it will not begin executing 
+until the debugger sends it an instruction telling it to.</p>
+
+<p>Looking at the debugger, we should be able to see a screen that looks something like this:</p>
+
+<div class="pull-left lede-img"><a href="http://technosophos.com/sites/default/files/images/xdebug-macgdbp.png"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/xdebug-macgdbp.png"></a></div>
+
+<p>This is the main debugger window. At the top are the buttons used to 
+control the debugging process. Beneath the button bar are two panes. The
+ one on the left displays all of the variables currently in scope. As 
+you progress through a debugging session, these values will change. You 
+can watch them to see what is happening as you go.</p>
+
+<p>The right pane shows the call stack. This provides a quick way of 
+correlating where we are in the program's execution with locations in 
+the source code.</p>
+
+<p>Beneath these two panes is the main code window. This displays the 
+source code that is currently being executed. The line about to be 
+executed is highlighted in red.</p>
+
+<p>To begin the debugging process, let's take a look at the button bar.</p>
+
+<div class="pull-left lede-img"><a href="http://technosophos.com/sites/default/files/images/xdebug-macgdbp-buttons.png"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/xdebug-macgdbp-buttons.png"></a></div>
+
+<p>From left to right, the buttons are:</p>
+
+<ul>
+<li><em>Step into</em>: Clicking this will advance the debugger one step
+ and, if necessary, go "into" the function, class, file, etc. By 
+clicking this button repeatedly, you can step through every part of the 
+process.</li>
+<li><em>Step out</em>: This will move up a level. For example, if you 
+are mid-way through a function and you step out, the debugger will 
+advance to the next part of the code, skipping the remainder of the 
+function.</li>
+<li><em>Step Over (Skip)</em>: This will skip examining the next step. 
+For example, if the current line is pointing to a function, and you do 
+not want to see the function execute, you can skip it with this button. 
+Clicking this will simply advance to the next line in the current scope.
+
+<ul>
+<li><em>Continue (Play)</em>: Continue execution until either the next breakpoint or the end of the script.</li>
+<li><em>Reset</em>: Remove the current debugging session and wait for the next request from the server.</li>
+</ul></li>
+</ul>
+
+<p>Using these buttons, you can navigate through the execution of a 
+script. While this will give you a detailed step-by-step analysis of a 
+program as it executes, it can often be overkill. More often, you will 
+want to analyze just a small part of your script. That is best 
+accomplished with breakpoints.</p>
+
+<p>A <strong>breakpoint</strong> is a marker that tells the debugger to 
+pause when the location is reached. Using breakpoints, you can set the 
+debugger to play through most of the code, pausing only when it gets to 
+the portion of interest.</p>
+
+<p>To set breakpoints in MacGDBp, navigate to the <em>Windows</em> menu and click on <em>Breakpoints</em>. There you can view and edit breakpoints.</p>
+
+<p>To add a new breakpoint, click on the <em>+</em> button in the 
+lower-left and then select the desired file from within MAMP's htdocs 
+directory. Once you are viewing the file, you can set a breakpoint by 
+clicking on a line number. This will overlay a blue arrow on top of the 
+line number. (Clearing the breakpoint is done by clicking on the arrow.)</p>
+
+<div class="pull-left lede-img"><a href="http://technosophos.com/sites/default/files/images/xdebug-macgdbp-breakpoint.png"><img class="img-polaroid" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/xdebug-macgdbp-breakpoint.png"></a></div>
+
+<p>You can set as many breakpoints as you want.</p>
+
+<p>Once breakpoints are set, clicking on the <em>Continue</em> button 
+during a debug session will cause the code to execute until it hits the 
+next breakpoint. This method can be much faster than stepping through 
+the code.</p>
+
+<p>Once you have finished executing a script, the <em>Reset</em> button will be activated. You will not be able to start another debugging session until you have reset the debugger.</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>That is all there is to configuring and using XDebug with MAMP, TextMate, and MacGDBp.</p>
+
+<p>But we have come nowhere near exhausting the capabilities of XDebug. 
+With profiling and cache grinding, you can better understand how long 
+your program takes, and what areas are bottlenecks. With coverage 
+analysis (in XDebug 2), you can determine how much of the code is being 
+exercised -- an invaluable tool for automated testing. In fact, in 
+XDebug 2, you can even interact with the debugger directly.</p>
+
+<p>For now, though, the basics are covered. You should be able to 
+install XDebug on MAMP, configure it to use TextMate and print stack 
+traces, and also set it up to send debugging information to MacGDBp.</p>
+
+          
+
+
+            <hr>
+            <ul class="list-inline">
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/xdebug.html">xdebug</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/textmate.html">textmate</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/querypath.html">querypath</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/php.html">php</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/pecl.html">pecl</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/macgdbp.html">macgdbp</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/xdebug.html">xdebug</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/textmate.html">textmate</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/querypath.html">querypath</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/php.html">php</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/pecl.html">pecl</a></span></li>
+            
+              <li><span class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/macgdbp.html">macgdbp</a></span></li>
+            
+            </ul>
+            <hr>
+              <div style="text-align: center">
+                <script async="" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/adsbygoogle.js"></script>
+                <!-- 468-thin-banner -->
+                <ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:468px;height:60px" data-ad-client="ca-pub-6951383364964029" data-ad-slot="5274063582"><ins style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:468px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="60" scrolling="no" width="468"></iframe></ins></ins></ins>
+                <script>
+                  (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+              </div>
+            <!-- AddThis Button BEGIN -->
+            
+          
+        </section>
+        
+
+
+        <section>
+          <div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/a.html" style="width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 536px ! important;" title="Disqus" tabindex="0" allowtransparency="true" data-disqus-uid="2" id="dsq-2" frameborder="0" scrolling="no" width="100%"></iframe></div>
+            <script type="text/javascript">
+                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                var disqus_shortname = 'technosophos'; // required: replace example with your forum shortname
+
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+            
+            
+        </section>
+        
+      <div class="clearfix content-well-bottom"></div>
+      </div>
+
+      <div class="col-md-3"> 
+        <aside>
+          <div class="well well-small">
+            <h4>Matt Butcher</h4>
+            <div id="jump">
+              <img src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/mpb-horiz-250px.jpg" class="img-responsive img-rounded">
+            </div>
+            <p>Matt is a software developer. He has written multiple 
+books and articles, and has managed or contributed to dozens of open 
+source projects. He has a Ph.D. in philosophy.
+            </p>
+            <p class="pull-right"><a href="http://technosophos.com/about.html">More »</a></p>
+            <div class="clearfix"></div>
+            <iframe style="width: 181px; height: 28px;" data-twttr-rendered="true" title="Twitter Follow Button" class="twitter-follow-button twitter-follow-button" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/follow_button.html" allowtransparency="true" id="twitter-widget-0" frameborder="0" scrolling="no"></iframe>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <div class="well" style="text-align:center">
+            <script async="" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/adsbygoogle.js"></script>
+            <!-- 160-Skyscraper -->
+            <ins data-adsbygoogle-status="done" class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-6951383364964029" data-ad-slot="9738319240"><ins style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:160px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="600" scrolling="no" width="160"></iframe></ins></ins></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+
+          <div class="panel panel-info">
+
+            <div class="panel-heading"><h4>Recent Posts</h4></div>
+            <div class="panel-body">
+              <ul class="list-unstyled">
+                
+                  <li>» <a href="http://technosophos.com/2014/04/14/the-register-covers-revolv-s-db-migration.html">The Register Covers The Revolv DB Migration</a> <small>Apr 14</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/04/11/nosql-no-more.html">NoSQL No More</a> <small>Apr 11</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/24/a-quick-theory-of-moral-obligation.html">A Quick Theory of Moral Obligation</a> <small>Mar 24</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/22/go-s-handy-ioutils-package.html">Go's Handy ioutils Package</a> <small>Mar 22</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/20/good-guys-don-t-always-give-away-the-code.html">Good Guys Don't (Always) Give Away the Code</a> <small>Mar 20</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/19/ssl-password-protection-for-kibana.html">SSL And Password Protection for Kibana</a> <small>Mar 19</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/19/generating-stack-traces-in-go.html">Generating Stack Traces in Go</a> <small>Mar 19</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/18/a-simple-udp-server-in-go.html">A Simple UDP Server in Go</a> <small>Mar 18</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/12/importing-python-docs-into-dash.html">Importing Python Docs into Dash</a> <small>Mar 12</small></li>
+                
+                  <li>» <a href="http://technosophos.com/2014/03/11/goose-for-database-migrations.html">Goose for Database Migrations</a> <small>Mar 11</small></li>
+                
+              </ul>
+            </div>
+
+
+
+          </div>
+        </aside>
+      </div>
+
+    </div>
+    <!-- bottom row -->
+    <div class="row" id="featurettes">
+      <div class="col-md-4">
+        <div class="well well-small">
+          <h4>Archive</h4>
+            <ul class="list-unstyled">
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2014.html">2014</a> 
+              <span class="badge">14</span></li>
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2013.html">2013</a> 
+              <span class="badge">34</span></li>
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2012.html">2012</a> 
+              <span class="badge">42</span></li>
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2011.html">2011</a> 
+              <span class="badge">24</span></li>
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2010.html">2010</a> 
+              <span class="badge">49</span></li>
+              
+                <li><span class="glyphicon glyphicon-calendar"></span> <a href="http://technosophos.com/2009.html">2009</a> 
+              <span class="badge">103</span></li>
+              
+            </ul>
+
+
+
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="well well-small">
+          <h4>Books</h4>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/drupal-7-multi-sites-configuration/book" title="Drupal 7 Multi Sites Configuration">
+              <img src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/8000_multisite_200px.jpg" class="media-object" height="123" width="100"></a>
+            <div class="media-body"><h4>Drupal 7 Multi-Site Configuration</h4>Configure Drupal to run more than one site.</div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="https://www.packtpub.com/drupal-7-module-development/book" title="Drupal 7 Module Development"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/drupal7_small.jpg"></a>
+            <div class="media-body">
+              <h4>Drupal 7 Module Development</h4>
+              Create Drupal 7 modules and themes.
+            </div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/drupal-6-javascript-and-jquery/book/mid/270509jtdoa8" title="Drupal 6 JavaScript and jQuery"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/drupal_js_small.png"></a>
+            <div class="media-body">
+              <h4>Drupal 6 JavaScript and jQuery</h4>
+              Create Drupal 7 modules and themes.
+            </div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/drupal-6-module-development/book/mid/2705094vizoc" title="Learning Drupal 6 Module Development"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/drupal_modules_small.png"></a>
+            <div class="media-body">
+              <h4>Drupal 6 Module Development</h4>
+              Create Drupal 6 modules and themes.
+            </div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book/mid/270509jb1hcv" title="Mastering OpenLDAP"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/1847191029.png"></a>
+            <div class="media-body">
+              <h4>Mastering OpenLDAP</h4>
+              Install, configure, and administer an OpenLDAP server.
+            </div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/OpenCMS6-admin/book/mid/27050903m25a" title="Managing and Customizing OpenCms 6 Websites"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/opencms6.png"></a>
+            <div class="media-body">
+              <h4>Managing and Customizing OpenCms 6 Websites</h4>
+              Install, configure and use the OpenCms content management system.
+            </div>
+          </div>
+          <div class="media">
+            <a class="pull-left" href="http://www.packtpub.com/opencms/book/mid/2705099cefx0" title="Building Websites with OpenCms"><img class="media-object" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/opencms5.png"></a>
+            <div class="media-body">
+              <h4>Building Websites with OpenCms 5</h4>
+              Write custom Java and JSP for OpenCms.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="well well-small">
+          <h4>Popular Tags</h4>
+          <ul class="list-inline">
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/querypath.html">querypath</a> 
+                 (51)</li>
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/php.html">php</a> 
+                 (104)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/programming.html">programming</a> 
+                 (104)</li>
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/os-x.html">os x</a> 
+                 (20)</li>
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/mac.html">mac</a> 
+                 (16)</li>
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/drupal.html">drupal</a> 
+                 (73)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/philosophy.html">philosophy</a> 
+                 (7)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/twitter.html">twitter</a> 
+                 (6)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/xdebug.html">xdebug</a> 
+                 (6)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/javascript.html">javascript</a> 
+                 (27)</li>
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/jquery.html">jquery</a> 
+                 (10)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/system-administration.html">system administration</a> 
+                 (19)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/openamplify.html">openamplify</a> 
+                 (10)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/html.html">html</a> 
+                 (10)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/phing.html">phing</a> 
+                 (6)</li>
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/vim.html">vim</a> 
+                 (7)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/linux.html">linux</a> 
+                 (10)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/performance.html">performance</a> 
+                 (9)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/nginx.html">nginx</a> 
+                 (7)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/ubuntu.html">ubuntu</a> 
+                 (6)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/node-js.html">node.js</a> 
+                 (15)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/hpcloud.html">hpcloud</a> 
+                 (11)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/golang.html">golang</a> 
+                 (12)</li>
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/go.html">go</a> 
+                 (10)</li>
+              
+            
+              
+                <li class="label label-default"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/devops.html">devops</a> 
+                 (6)</li>
+              
+            
+              
+                <li class="label label-info"><span class="glyphicon glyphicon-tag"></span> <a href="http://technosophos.com/tags/cloud.html">cloud</a> 
+                 (11)</li>
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+              
+            
+          </ul>
+        </div>
+
+        <div class="well well-small">
+          <h4>Projects</h4>
+          <ul>
+            <li><a href="http://querypath.org/">QueryPath</a></li>
+            <li><a href="https://github.com/Masterminds">Masterminds</a></li>
+            <li><a href="http://masterminds.github.io/html5-php/">HTML5-PHP</a></li>
+            <li><a href="https://github.com/Masterminds/Cookoo">Cookoo</a></li>
+            <li><a href="https://github.com/Masterminds/Fortissimo">Fortissimo</a></li>
+            <li><a href="https://github.com/technosophos/Pronto.js">Pronto.js</a></li>
+            <li><a href="http://aleph-null.tv/">Aleph-Null.TV</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+        <img src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/big-mvbbutton.png">
+        <p>Copyright © 2008-2014, Matt Butcher.</p>
+        <p><a href="http://technosophos.com/feed.xml">Atom Feed</a></p>
+        <p>Yes, this is another <a href="http://getbootstrap.com/">Twitter Bootstrap</a> site, 
+        but I made it cooler by
+        adding a <a href="http://bootswatch.com/">Bootswatch</a> theme.</p>
+      </div>
+    </footer>
+    <!--script src="/js/bootstrap.min.js"></script -->
+    <script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/bootstrap.js"></script>
+    <!-- AddThis Smart Layers BEGIN -->
+<!-- Go to http://www.addthis.com/get/smart-layers to customize -->
+<script type="text/javascript" src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/addthis_widget.js"></script><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;"><iframe src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/sh156.html" style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px none; left: 0px; top: 0px;" title="AddThis utility frame" id="_atssh303"></iframe></div><script src="TechnoSophos_%20Debugging%20your%20PHP%20Code_%20XDebug%20on%20MAMP%20with%20TextMate%20and%20MacGDBp%20Support_files/core129.js" type="text/javascript"></script>
+<script type="text/javascript">
+  addthis.layers({
+    'theme' : 'dark',
+    'share' : {
+      'position' : 'right',
+      'numPreferredServices' : 5
+    }   
+  });
+</script>
+<!-- AddThis Smart Layers END -->
+  
+
+<canvas style="display: none;"></canvas><div aria-labelledby="at4-share-label" role="region" class="at4-share-outer-right addthis-smartlayers addthis-smartlayers-desktop"><h2 id="at4-share-label">AddThis Sharing</h2><div class="atss atss-right addthis_32x32_style animated slideInRight at4-show" id="at4-share"><a href="#" class="at4-share-btn at-svc-facebook"><span title="Facebook" class="at300bs at15nc at15t_facebook">Facebook</span></a><a href="#" class="at4-share-btn at-svc-twitter"><span title="Twitter" class="at300bs at15nc at15t_twitter">Twitter</span></a><a href="#" class="at4-share-btn at-svc-email"><span title="Email" class="at300bs at15nc at15t_email">Email</span></a><a href="#" class="at4-share-btn at-svc-print"><span title="Print" class="at300bs at15nc at15t_print">Print</span></a><a href="#" class="at4-share-btn at-svc-compact"><span title="More" class="at300bs at15nc at15t_compact">More</span></a><div class="at-share-close-control ats-dark"><div title="Hide" class="at4-arrow at-right at4-hide" id="at4-scc">Hide</div></div></div><div class="atss at-share-open-control-right ats-dark at4-hide" id="at4-soc"><div title="Show" class="at4-arrow at-left">Show</div></div></div><div aria-labelledby="at-thankyou-label" role="dialog" class="at4-thankyou at4-thankyou-background at4-hide ats-dark at4-thankyou-desktop addthis-smartlayers animated fadeIn at4-show" id="at4-thankyou"><div class="at4lb-inner"><a title="Close" href="#" class="at4x"></a><a target="_blank" title="AddThis" href="http://www.addthis.com/?utm_source=dynpo&amp;utm_medium=img&amp;utm_content=AT_main_WT&amp;utm_campaign=AT_main" class="at4-logo" id="at4-palogo">AddThis</a><a target="_blank" title="Privacy" href="http://www.addthis.com/privacy/privacy-policy" class="at4-privacy" id="at4-paprivacy">Privacy</a><div class="at4-thankyou-inner"><h1 class="thankyou-title" id="at-thankyou-label"></h1><h3 class="thankyou-description"></h3><div class="at4-thankyou-layer"></div></div></div></div><div class="addthis-smartlayers addthis-smartlayers-mobile animated fadeIn at4-show at4-hide" id="at4m-mobile-container"><div class="at4m-dock at4m-dock-bottom ats-light at4-ma1" id="at4m-dock"><a href="#" id="at4m-sb"><i class="at4m-dock-share"></i>Share</a></div><div class="at4m-dock-toggle at4m-dock-bottom ats-light"><a href="#" id="at4m-dock-toggle">Toggle Dock</a></div><div class="at4m-menu ats-light" id="at4m-menu"><div class="at4m-menu-inner"><div class="at4m-menu-header"><div class="at4m-menu-header-inner"><div id="at4m-menu-head">Share</div><a href="#" class="at4m-menu-cancel" id="at4m-mcc">Close</a></div></div><div id="at4m-menu-body"><div id="scroller"><div class="at4m-menu-search"><input id="at4-searchBox" placeholder="Find a service" type="text"><input type="submit"><input id="at4-searchClear" class="at4-hide" type="cancel"></div><div class="at4m-menu-content"><ul class="addthis_32x32_style" id="at4m-services"></ul></div></div></div><div class="at4m-menu-footer"><div class="at4m-menu-footer-inner"><a target="_blank" href="http://www.addthis.com/?utm_source=dynmex&amp;utm_medium=img&amp;utm_content=AT_main_WT&amp;utm_campaign=AT_main" class="at4m-menu-footer-logo">AddThis</a><a target="_blank" href="http://www.addthis.com/privacy/privacy-policy" class="at4m-menu-footer-privacy">Privacy</a></div></div></div></div></div></body></html>

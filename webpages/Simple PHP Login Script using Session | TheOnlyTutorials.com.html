@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html style="" class=" js flexbox flexboxlegacy canvas canvastext draganddrop rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio" prefix="og: http://ogp.me/ns#" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><script src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/fql" async=""></script>
+	<meta charset="UTF-8">
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+	<!--[if IE ]>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<![endif]-->
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<title>Simple PHP Login Script using Session | TheOnlyTutorials.com</title>
+	<!--iOS/android/handheld specific -->
+<link rel="apple-touch-icon" href="http://www.theonlytutorials.com/wordpress/wp-content/themes/point/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="pingback" href="http://www.theonlytutorials.com/wordpress/xmlrpc.php">
+	
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.5.2.7 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/">
+<link rel="author" href="https://plus.google.com/+agurchandbabusubramanian/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Simple PHP Login Script using Session - TheOnlyTutorials.com">
+<meta property="og:description" content="&nbsp; Note: Download the script Below Are you looking for a very simple login script which does not interact with the database?. No database used in this script. This script is useful if you want to develop a simple admin page / report page. The workflow of the script is like True or False concept. If the session value is present then show the secret page or go to the login page! Here is the entire login and logout script! [code lang=&quot;php&quot;] &lt;?php //simple PHP login script using Session //start the session * this is important session_start(); //login script if(isset($_REQUEST['ch']) &amp;&amp; $_REQUEST['ch'] == 'login'){ //give your login credentials here if($_REQUEST['uname'] == 'admin' &amp;&amp; $_REQUEST['pass'] == 'admin123') $_SESSION['login_user'] = 1; else $_SESSION['login_msg'] = 1; } //get the page name where to redirect if(isset($_REQUEST['pagename'])) $pagename = $_REQUEST['pagename']; //logout script if(isset($_REQUEST['ch']) &amp;&amp; $_REQUEST['ch'] == 'logout'){ unset($_SESSION['login_user']); header('Location:login.php'); } if(isset($_SESSION['login_user'])){ if(isset($_REQUEST['pagename'])) header('Location:'.$pagename.'.php'); else header('Location:index.php'); }else{ ?&gt; &lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt; &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt; &lt;head&gt; &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt; &lt;title&gt;Simple PHP Login Script using Session&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;table width=&quot;850&quot; border=&quot;0&quot; align=&quot;center&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt; &lt;tr&gt;&lt;td&gt;&nbsp;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt; &lt;form name=&quot;login_form&quot; method=&quot;post&quot; action=&quot;&quot;&gt; &lt;table align=&quot;center&quot; style=&quot;background-color:#fff;&quot;&gt; &lt;tr&gt;&lt;td colspan=&quot;2&quot; align=&quot;center&quot;&gt;&lt;strong&gt;Login Details&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Username&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;text&quot; name=&quot;uname&quot; id=&quot;uname&quot;&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td&gt;Password&lt;/td&gt;&lt;td&gt;&lt;input type=&quot;password&quot; name=&quot;pass&quot; id=&quot;pass&quot;&gt;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt; &lt;td colspan=&quot;2&quot; align=&quot;center&quot;&gt; &lt;p style=&quot;color:red;&quot;&gt; &lt;?php //display the error msg if the login credentials are wrong! if(isset($_SESSION['login_msg'])){ echo 'Wrong username and password !'; unset($_SESSION['login_msg']); } ?&gt; &lt;/p&gt; &lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td align=&quot;center&quot; colspan=&quot;2&quot;&gt;&lt;input type=&quot;submit&quot; value=&quot;Login&quot;&gt;&lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;input type=&quot;hidden&quot; name=&quot;ch&quot; value=&quot;login&quot;&gt; &lt;/form&gt; &lt;/td&gt;&lt;/tr&gt; &lt;/table&gt; &lt;?php } ?&gt; &lt;/body&gt; &lt;/html&gt; [/code] How to use this script?. Save the above code as ‘login.php’ . Then just use the below lines of code in any of your php page! [code lang=&quot;php&quot;] &lt;?php session_start(); //check logged in or not! if(!isset($_SESSION['login_user'])){ header('Location:login.php?pagename='.basename($_SERVER['PHP_SELF'], &quot;.php&quot;)); } ?&gt; &lt;html&gt; &lt;head&gt;&lt;title&gt;Simple PHP Login Script Using Session - Index page&lt;/title&gt;&lt;/head&gt; &lt;table width=&quot;850&quot; border=&quot;0&quot; align=&quot;center&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt; &lt;tr&gt; &lt;td&gt; &lt;div style=&quot;float:left;&quot;&gt;&lt;a href=&quot;login.php?ch=logout&quot;&gt;Logout&lt;/a&gt;&lt;/div&gt;&nbsp;&nbsp;&nbsp; &lt;/td&gt; &lt;/tr&gt; &lt;tr&gt; &lt;td&gt; &lt;h1&gt;Your Content will come here!&lt;/h1&gt; &lt;/td&gt; &lt;/tr&gt; &lt;/table&gt; &lt;/head&gt; &lt;/html&gt; [/code] You can download this script from the below link and can use it in any of your project immediately!. &nbsp; &nbsp; Here is another advanced tutorial -&nbsp;jQuery Ajax Login and Signup form – PHP Script! About&nbsp;Agurchand BabuPHP Developer, Part-time Blogger from Bangalore, India. Find me on Facebook">
+<meta property="og:url" content="http://blog.theonlytutorials.com/simple-php-login-script-using-session/">
+<meta property="og:site_name" content="TheOnlyTutorials.com">
+<meta property="article:author" content="https://www.facebook.com/agurchand">
+<meta property="article:tag" content="free php logic">
+<meta property="article:tag" content="php login script">
+<meta property="article:tag" content="php session login script">
+<meta property="article:tag" content="ready to use free php login script">
+<meta property="article:section" content="PHP Tutorials">
+<meta property="article:published_time" content="2012-11-01T09:06:47+00:00">
+<meta property="article:modified_time" content="2014-04-20T01:08:01+00:00">
+<meta property="og:updated_time" content="2014-04-20T01:08:01+00:00">
+<meta property="og:image" content="http://www.theonlytutorials.com/wordpress/wp-content/uploads/2012/04/download_btn.png">
+<meta property="og:image" content="http://www.theonlytutorials.com/wordpress/wp-content/uploads/2012/04/demo_btn.png">
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="TheOnlyTutorials.com » Feed" href="http://blog.theonlytutorials.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="TheOnlyTutorials.com » Comments Feed" href="http://blog.theonlytutorials.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="TheOnlyTutorials.com » Simple PHP Login Script using Session Comments Feed" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/feed/">
+<link rel="stylesheet" id="jetpack-subscriptions-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/subscriptions.css" type="text/css" media="all">
+<link rel="stylesheet" id="crayon-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/crayon.css" type="text/css" media="all">
+<link rel="stylesheet" id="contact-form-7-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/styles.css" type="text/css" media="all">
+<link rel="stylesheet" id="jetpack-widgets-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/widgets.css" type="text/css" media="all">
+<link rel="stylesheet" id="authorsure-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/public.css" type="text/css" media="all">
+<link rel="stylesheet" id="stylesheet-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/style.css" type="text/css" media="all">
+<style type="text/css">
+
+		body {background-color:#e7e5e6; }
+		body {background-image: url();}
+		input#author:focus, input#email:focus, input#url:focus, #commentform textarea:focus { border-color:#38b7ee;}
+		a:hover, .menu .current-menu-item > a, .menu .current-menu-item, .current-menu-ancestor > a.sf-with-ul, .current-menu-ancestor, footer .textwidget a, .single_post a, #commentform a, .copyrights a:hover, a, footer .widget li a:hover, .menu > li:hover > a, .single_post .post-info a, .post-info a, .readMore a, .reply a, .fn a, .carousel a:hover, .single_post .related-posts a:hover, .sidebar.c-4-12 .textwidget a, footer .textwidget a, .sidebar.c-4-12 a:hover { color:#38b7ee; }	
+		.nav-previous a, .nav-next a, .header-button, .sub-menu, #commentform input#submit, .tagcloud a, #tabber ul.tabs li a.selected, .featured-cat, .mts-subscribe input[type='submit'], .pagination a { background-color:#38b7ee; color: #fff; }
+		
+		
+			
+</style>
+<link rel="stylesheet" id="GoogleFonts-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/css_002.css" type="text/css" media="all">
+<link rel="stylesheet" id="GoogleFonts2-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/css.css" type="text/css" media="all">
+<link rel="stylesheet" id="responsive-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/responsive.css" type="text/css" media="all">
+<link rel="stylesheet" id="sharedaddy-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/sharing.css" type="text/css" media="all">
+<link rel="stylesheet" id="shCore-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/shCore.css" type="text/css" media="all">
+<link rel="stylesheet" id="shCoreDefault-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/shCoreDefault.css" type="text/css" media="all">
+<link rel="stylesheet" id="shThemeDefault-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/shThemeDefault.css" type="text/css" media="all">
+<script src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/widgets.js" id="twitter-wjs"></script><script src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/jquery.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/jquery-migrate.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var CrayonSyntaxSettings = {"version":"2.6.0","is_admin":"0","ajaxurl":"http:\/\/www.theonlytutorials.com\/wordpress\/wp-admin\/admin-ajax.php","prefix":"crayon-","setting":"crayon-setting","selected":"crayon-setting-selected","changed":"crayon-setting-changed","special":"crayon-setting-special","orig_value":"data-orig-value","debug":""};
+var CrayonSyntaxStrings = {"copy":"Press %s to Copy, %s to Paste","minimize":"Click To Expand Code"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/crayon.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/modernizr.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/customscript.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.theonlytutorials.com/wordpress/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.theonlytutorials.com/wordpress/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 3.9">
+<link rel="shortlink" href="http://wp.me/p2lSH8-6L">
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-11973261-12']);
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+<link rel="stylesheet" type="text/css" id="gravatar-card-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/hovercard.css"><link rel="stylesheet" type="text/css" id="gravatar-card-services-css" href="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/services.css"></head>
+<body data-twttr-rendered="true" id="blog" class="single single-post postid-419 single-format-standard main">
+	<div class="main-container">
+				<header class="main-header">
+			<div id="header">
+															<h2 id="logo" class="image-logo"><a href="http://blog.theonlytutorials.com/"><img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/blog-logo1.png" alt="TheOnlyTutorials.com"></a></h2>
+													<div class="secondary-navigation">
+					<nav id="navigation">
+													<ul id="menu-agur-menu" class="menu sf-js-enabled"><li id="menu-item-999" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home"><a href="http://blog.theonlytutorials.com/">Home<br><span class="sub"></span></a></li>
+<li id="menu-item-1000" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent"><a href="http://blog.theonlytutorials.com/category/php/">PHP Tutorials<br><span class="sub"></span></a></li>
+<li id="menu-item-977" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="http://blog.theonlytutorials.com/category/mysql/">MySQL<br><span class="sub"></span></a></li>
+<li id="menu-item-975" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="http://blog.theonlytutorials.com/category/jquery/">jQuery<br><span class="sub"></span></a></li>
+<li id="menu-item-978" class="menu-item menu-item-type-taxonomy menu-item-object-category"><a href="http://blog.theonlytutorials.com/category/asp/classic-asp/">Classic ASP<br><span class="sub"></span></a></li>
+</ul>												<a href="#" id="pull">Menu</a>
+					</nav>
+				</div>
+			</div>
+		</header>
+				<div id="page" class="single">
+	<div class="content">
+		<!-- Start Article -->
+		<article class="article">		
+							<div id="post-419" class="post-419 post type-post status-publish format-standard hentry category-php tag-free-php-logic tag-php-login-script tag-php-session-login-script tag-ready-to-use-free-php-login-script post">
+					<div class="single_post">
+						<header>
+							<!-- Start Title -->
+							<h1 class="title single-title">Simple PHP Login Script using Session</h1>
+							<!-- End Title -->
+							<!-- Start Post Meta -->
+							<div class="post-info"><span class="theauthor"><a rel="nofollow" href="http://blog.theonlytutorials.com/author/agurchand/" title="Posts by Agurchand Babu">Agurchand Babu</a></span> | <span class="thetime">November 1, 2012</span> | <span class="thecategory"><a href="http://blog.theonlytutorials.com/category/php/" title="View all posts in PHP Tutorials" rel="nofollow">PHP Tutorials</a></span> | <span class="thecomment"><a href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/#comments">19 Comments</a></span></div>
+							<!-- End Post Meta -->
+						</header>
+						<!-- Start Content -->
+						<div class="post-single-content box mark-links">
+														
+<!-- Quick Adsense WordPress Plugin: http://quicksense.net/ -->
+<div style="float:none;margin:0px;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8524980424149892";
+/* theonlytutorials336 */
+google_ad_slot = "2579771131";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" frameborder="0" height="280" scrolling="no" width="336"></iframe></ins></ins>
+</div>
+<p>&nbsp;</p>
+<p><strong>Note: Download the script Below</strong></p>
+<p>Are you looking for a very simple login script which does not interact with the database?.</p>
+<p>No database used in this script. This script is useful if you want to develop a simple admin page / report page.</p>
+<p>The workflow of the script is like True or False concept. If the 
+session value is present then show the secret page or go to the login 
+page!</p>
+<p>Here is the entire login and logout script!</p>
+<pre class="brush: php; toolbar: false; auto-links: false;">
+&lt;?php
+//simple PHP login script using Session
+//start the session * this is important
+session_start();
+
+//login script
+if(isset($_REQUEST['ch']) &amp;&amp; $_REQUEST['ch'] == 'login'){
+
+//give your login credentials here
+if($_REQUEST['uname'] == 'admin' &amp;&amp; $_REQUEST['pass'] == 'admin123')
+$_SESSION['login_user'] = 1;
+else
+$_SESSION['login_msg'] = 1;
+}
+
+//get the page name where to redirect
+if(isset($_REQUEST['pagename']))
+$pagename = $_REQUEST['pagename'];
+
+//logout script
+if(isset($_REQUEST['ch']) &amp;&amp; $_REQUEST['ch'] == 'logout'){
+unset($_SESSION['login_user']);
+header('Location:login.php');
+}
+if(isset($_SESSION['login_user'])){
+if(isset($_REQUEST['pagename']))
+header('Location:'.$pagename.'.php');
+else
+header('Location:index.php');
+}else{
+?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
+&lt;title&gt;Simple PHP Login Script using Session&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table width="850" border="0" align="center" cellpadding="0" cellspacing="0"&gt;
+&lt;tr&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;
+&lt;form name="login_form" method="post" action=""&gt;
+&lt;table align="center" style="background-color:#fff;"&gt;
+&lt;tr&gt;&lt;td colspan="2" align="center"&gt;&lt;strong&gt;Login Details&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Username&lt;/td&gt;&lt;td&gt;&lt;input type="text" name="uname" id="uname"&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Password&lt;/td&gt;&lt;td&gt;&lt;input type="password" name="pass" id="pass"&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td colspan="2" align="center"&gt;
+&lt;p style="color:red;"&gt;
+&lt;?php
+//display the error msg if the login credentials are wrong!
+if(isset($_SESSION['login_msg'])){
+echo 'Wrong username and password !';
+unset($_SESSION['login_msg']);
+}
+?&gt;
+&lt;/p&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td align="center" colspan="2"&gt;&lt;input type="submit" value="Login"&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;input type="hidden" name="ch" value="login"&gt;
+&lt;/form&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;?php } ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+<p>How to use this script?.</p>
+<p>Save the above code as ‘login.php’ . Then just use the below lines of code in any of your php page!</p>
+<pre class="brush: php; toolbar: false; auto-links: false;">
+&lt;?php session_start();
+//check logged in or not!
+if(!isset($_SESSION['login_user'])){
+header('Location:login.php?pagename='.basename($_SERVER['PHP_SELF'], ".php"));
+}
+?&gt;
+&lt;html&gt;
+&lt;head&gt;&lt;title&gt;Simple PHP Login Script Using Session - Index page&lt;/title&gt;&lt;/head&gt;
+&lt;table width="850" border="0" align="center" cellpadding="0" cellspacing="0"&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;div style="float:left;"&gt;&lt;a href="login.php?ch=logout"&gt;Logout&lt;/a&gt;&lt;/div&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;h1&gt;Your Content will come here!&lt;/h1&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;/table&gt;
+&lt;/head&gt;
+&lt;/html&gt;
+
+</pre>
+<p>You can download this script from the below link and can use it in any of your project immediately!.</p>
+<p><a title="PHP Login Script" href="http://www.theonlytutorials.com/downloads/phplogin.zip" target="_blank"><img scale="0" title="Download" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/download_btn.png" alt="Download" height="47" width="136"></a>&nbsp; &nbsp;<a title="PHP Login Demo" href="http://www.theonlytutorials.com/demo/phplogin" target="_blank"><img scale="0" title="Demo" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/demo_btn.png" alt="Demo" height="47" width="136"></a></p>
+<p>Here is another advanced tutorial -&nbsp;<a href="http://blog.theonlytutorials.com/jquery-ajax-login-signup-form-php-script/" target="_blank"><strong>jQuery Ajax Login and Signup form – PHP Script!</strong></a></p>
+
+<!-- Quick Adsense WordPress Plugin: http://quicksense.net/ -->
+<div style="float:left;margin:10px 10px 10px 0;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-8524980424149892";
+/* theonlytutorials336 */
+google_ad_slot = "2579771131";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/show_ads.js">
+</script><ins style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:336px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" frameborder="0" height="280" scrolling="no" width="336"></iframe></ins></ins>
+</div>
+
+<div style="font-size:0px;height:0px;line-height:0px;margin:0;padding:0;clear:both"></div><div class="authorsure-author-box"><img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-0" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=60&amp;d=&amp;r=G" originals="60" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3_002.jpg" class="avatar avatar-60 photo grav-hashed grav-hijack" height="60" width="60"><h4>About&nbsp;<a rel="author" href="http://blog.theonlytutorials.com/author/agurchand/" class="authorsure-author-link">Agurchand Babu</a></h4><p>PHP Developer, Part-time Blogger from Bangalore, India. Find me on <a rel="nofollow" href="http://www.facebook.com/agurchand">Facebook</a></p>
+</div><div class="clear"></div><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li><a href="#" class="sharing-anchor sd-button share-more"><span>Share</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-stumbleupon"><a rel="nofollow" class="share-stumbleupon sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=stumbleupon&amp;nb=1" title="Click to share on StumbleUpon"><span>StumbleUpon</span></a></li><li class="share-tumblr"><a rel="nofollow" class="share-tumblr sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=tumblr&amp;nb=1" title="Click to share on Tumblr"><span>Tumblr</span></a></li><li class="share-end"></li><li class="share-digg"><a rel="nofollow" class="share-digg sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=digg&amp;nb=1" title="Click to Digg this post"><span>Digg</span></a></li><li class="share-pinterest"><a rel="nofollow" class="share-pinterest sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=pinterest&amp;nb=1" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-end"></li><li class="share-reddit"><a rel="nofollow" class="share-reddit sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=reddit&amp;nb=1" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-linkedin"><a rel="nofollow" class="share-linkedin sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=linkedin&amp;nb=1" title="Click to share on LinkedIn" id="sharing-linkedin-419"><span>LinkedIn</span></a></li><li class="share-end"></li><li class="share-twitter"><a rel="nofollow" class="share-twitter sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=twitter&amp;nb=1" title="Click to share on Twitter" id="sharing-twitter-419"><span>Twitter</span></a></li><li class="share-email share-service-visible"><a rel="nofollow" class="share-email sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=email&amp;nb=1" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-end"></li><li class="share-print"><a rel="nofollow" class="share-print sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/#print" title="Click to print"><span>Print</span></a></li><li class="share-facebook"><a rel="nofollow" class="share-facebook sd-button share-icon" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?share=facebook&amp;nb=1" title="Share on Facebook" id="sharing-facebook-419"><span>Facebook</span></a></li><li class="share-end"></li><li class="share-end"></li></ul></div></div></div></div></div>														 
+													</div>
+						<!-- End Content -->
+							
+							<!-- Start Related Posts -->
+							<div class="related-posts"><h3>Related Posts</h3><div class="postauthor-top"><ul>								<li class=" rpexcerpt1 ">
+									<a rel="nofollow" class="relatedthumb" href="http://blog.theonlytutorials.com/how-to-export-specific-columns-in-mysql/" title="How to export specific columns in mysql?">
+										<span class="rthumb">
+																							<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/specific.jpg" class="attachment-widgetthumb wp-post-image" alt="specific" title="" height="45" width="60">																					</span>
+										<span>
+											How to export specific columns in mysql?										</span>
+									</a>
+									<div class="meta">
+										<a href="http://blog.theonlytutorials.com/how-to-export-specific-columns-in-mysql/#comments" rel="nofollow">1 Comment</a> | <span class="thetime">Nov 29, 2011</span>
+									</div> <!--end .entry-meta-->
+								</li>
+																								<li class=" rpexcerpt2 last">
+									<a rel="nofollow" class="relatedthumb" href="http://blog.theonlytutorials.com/how-to-disable-power-key-button-on-your-keyboard-in-winxp/" title="How to disable Power Key / Button on your Keyboard in WinXP">
+										<span class="rthumb">
+																							<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/smallthumb.png" alt="How to disable Power Key / Button on your Keyboard in WinXP" class="wp-post-image">
+																					</span>
+										<span>
+											How to disable Power Key / Button on your Keyboard in WinXP										</span>
+									</a>
+									<div class="meta">
+										<a href="http://blog.theonlytutorials.com/how-to-disable-power-key-button-on-your-keyboard-in-winxp/#comments" rel="nofollow">No Comments</a> | <span class="thetime">Nov 13, 2012</span>
+									</div> <!--end .entry-meta-->
+								</li>
+																								<li class=" rpexcerpt3 ">
+									<a rel="nofollow" class="relatedthumb" href="http://blog.theonlytutorials.com/how-to-display-data-from-a-mysql-database-php-script/" title="How to display data from a MySQL database – PHP Script">
+										<span class="rthumb">
+																							<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/smallthumb.png" alt="How to display data from a MySQL database – PHP Script" class="wp-post-image">
+																					</span>
+										<span>
+											How to display data from a MySQL database – PHP Script										</span>
+									</a>
+									<div class="meta">
+										<a href="http://blog.theonlytutorials.com/how-to-display-data-from-a-mysql-database-php-script/#comments" rel="nofollow">3 Comments</a> | <span class="thetime">Aug 26, 2012</span>
+									</div> <!--end .entry-meta-->
+								</li>
+																								<li class="last rpexcerpt4 last">
+									<a rel="nofollow" class="relatedthumb" href="http://blog.theonlytutorials.com/very-simple-jquery-and-php-ajax-request-ready-to-use-code/" title="Very Simple jQuery and PHP Ajax Request – Ready to use code">
+										<span class="rthumb">
+																							<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/smallthumb.png" alt="Very Simple jQuery and PHP Ajax Request – Ready to use code" class="wp-post-image">
+																					</span>
+										<span>
+											Very Simple jQuery and PHP Ajax Request – Ready to use code										</span>
+									</a>
+									<div class="meta">
+										<a href="http://blog.theonlytutorials.com/very-simple-jquery-and-php-ajax-request-ready-to-use-code/#comments" rel="nofollow">11 Comments</a> | <span class="thetime">Oct 17, 2012</span>
+									</div> <!--end .entry-meta-->
+								</li>
+																</ul></div></div>							<!-- End Related Posts -->
+						  
+													<!-- Start Author Box -->
+							<div class="postauthor-container">
+								<h4>About The Author</h4>
+								<div class="postauthor">
+									<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-1" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=100&amp;d=&amp;r=G" originals="100" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3_003.jpg" class="avatar avatar-100 photo grav-hashed grav-hijack" height="100" width="100">									<h5>Agurchand Babu</h5>
+									<p>PHP Developer, Part-time Blogger from Bangalore, India. Find me on <a href="http://www.facebook.com/agurchand">Facebook</a></p>
+								</div>
+							</div>
+							<!-- End Author Box -->
+						  
+					</div>
+				</div>
+				<!-- You can start editing here. -->
+	<div id="comments">
+		<div class="total-comments">19 Comments</div>
+		<ol class="commentlist">
+			<div class="navigation">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+				<li class="comment even thread-even depth-1" id="li-comment-1335">
+		<div id="comment-1335" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-f681090b58203916cfe418ca233ecebc-0" scale="2" src-orig="http://1.gravatar.com/avatar/f681090b58203916cfe418ca233ecebc?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/f681090b58203916cfe418ca233ecebc.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">gunju</span>				<time>March 22, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1335#respond" onclick='return addComment.moveForm("comment-1335", "1335", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>how to add new users because the above code specifies username and password in the login.php</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor odd alt depth-2" id="li-comment-1336">
+		<div id="comment-1336" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-2" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">agurchand</span>				<time>March 22, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1336#respond" onclick='return addComment.moveForm("comment-1336", "1336", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>This script is not for multiple user!. Anyway If you want to use 
+more than one, you can add one more username and pass in the if 
+condition like this!</p>
+<p>if(($_REQUEST['uname'] == ‘admin’ &amp;&amp; $_REQUEST['pass'] == 
+‘admin123′) or ($_REQUEST['uname'] == ‘gunju’ &amp;&amp; 
+$_REQUEST['pass'] == ‘gunju123′))</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1337">
+		<div id="comment-1337" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-4c83d7c55b6f0a1bccac521fb78e6702-0" scale="2" src-orig="http://0.gravatar.com/avatar/4c83d7c55b6f0a1bccac521fb78e6702?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/4c83d7c55b6f0a1bccac521fb78e6702.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">awink</span>				<time>March 22, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1337#respond" onclick='return addComment.moveForm("comment-1337", "1337", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Thank you so much!!!</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1380">
+		<div id="comment-1380" style="position:relative;">
+			<div class="comment-author vcard">
+				<img scale="2" src-orig="http://1.gravatar.com/avatar/f733b91db1484cc5bbde797716186623?s=70&amp;d=&amp;r=G" originals="70" id="grav-f733b91db1484cc5bbde797716186623-0" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/f733b91db1484cc5bbde797716186623.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://epsilonwiki.free.fr/alphawiki/" rel="external nofollow" class="url">alain marty</a></span>				<time>May 3, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1380#respond" onclick='return addComment.moveForm("comment-1380", "1380", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Thank you so much for this code working without a database.<br>
+I will add a multiple user function through an array of [user,pass].<br>
+I will use it in my little wiki opensource project alphawiki.<br>
+Alain Marty</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1426">
+		<div id="comment-1426" style="position:relative;">
+			<div class="comment-author vcard">
+				<img scale="2" src-orig="http://0.gravatar.com/avatar/6340276046ffb0b0a2560bb8e4f97ded?s=70&amp;d=&amp;r=G" originals="70" id="grav-6340276046ffb0b0a2560bb8e4f97ded-0" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/6340276046ffb0b0a2560bb8e4f97ded.png" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://www.facebook.com/alex.epp.7" rel="external nofollow" class="url">Alex Epp</a></span>				<time>May 31, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1426#respond" onclick='return addComment.moveForm("comment-1426", "1426", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>How do you get it so once you logon it redirects you to another page?</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor odd alt depth-2" id="li-comment-1427">
+		<div id="comment-1427" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-3" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">agurchand</span>				<time>May 31, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1427#respond" onclick='return addComment.moveForm("comment-1427", "1427", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>remove line no. 26 to 28. </p>
+<p>change this line<br>
+header(‘Location:index.php’);<br>
+to<br>
+header(‘Location:yourpage.php’);</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-1437">
+		<div id="comment-1437" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-631ab5ebb377922cf07dad885a025385-0" scale="2" src-orig="http://0.gravatar.com/avatar/631ab5ebb377922cf07dad885a025385?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/631ab5ebb377922cf07dad885a025385.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://onlineearninga.blogspot.com/" rel="external nofollow" class="url">ahmad raza</a></span>				<time>June 6, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1437#respond" onclick='return addComment.moveForm("comment-1437", "1437", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>thats very nice</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1438">
+		<div id="comment-1438" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-79173d6f52c4542b42bb29fe08220937-0" scale="2" src-orig="http://1.gravatar.com/avatar/79173d6f52c4542b42bb29fe08220937?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/79173d6f52c4542b42bb29fe08220937.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">Thomas</span>				<time>June 6, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1438#respond" onclick='return addComment.moveForm("comment-1438", "1438", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Thanks for this – works perfectly. A smal question – how long does the session last?</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor even depth-2" id="li-comment-1439">
+		<div id="comment-1439" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-4" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">agurchand</span>				<time>June 6, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1439#respond" onclick='return addComment.moveForm("comment-1439", "1439", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>It depends on the server configuration. Minimum 20 to 30 minutes.</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1482">
+		<div id="comment-1482" style="position:relative;">
+			<div class="comment-author vcard">
+				<img scale="2" src-orig="http://1.gravatar.com/avatar/d417812c53690b24f57463d216f8e7b8?s=70&amp;d=&amp;r=G" originals="70" id="grav-d417812c53690b24f57463d216f8e7b8-0" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/d417812c53690b24f57463d216f8e7b8.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://ic4l.net/" rel="external nofollow" class="url">ic4love</a></span>				<time>June 30, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1482#respond" onclick='return addComment.moveForm("comment-1482", "1482", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>how can i check the user and password from database?</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment even thread-odd thread-alt depth-1" id="li-comment-1498">
+		<div id="comment-1498" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-5fd8d34651dfe5ef314211ffbf5d0d67-0" scale="2" src-orig="http://1.gravatar.com/avatar/5fd8d34651dfe5ef314211ffbf5d0d67?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/5fd8d34651dfe5ef314211ffbf5d0d67.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">tim</span>				<time>July 9, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1498#respond" onclick='return addComment.moveForm("comment-1498", "1498", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>How can you echo the username?</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor odd alt depth-2" id="li-comment-1500">
+		<div id="comment-1500" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-5" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">agurchand</span>				<time>July 10, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1500#respond" onclick='return addComment.moveForm("comment-1500", "1500", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>store the $_REQUEST['uname'] in a session like this<br>
+$_SESSION['username'] = $_REQUEST['uname'];</p>
+<p>then print it in any file<br>
+echo $_SESSION['username'];</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment even depth-3" id="li-comment-1501">
+		<div id="comment-1501" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-5fd8d34651dfe5ef314211ffbf5d0d67-1" scale="2" src-orig="http://1.gravatar.com/avatar/5fd8d34651dfe5ef314211ffbf5d0d67?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/5fd8d34651dfe5ef314211ffbf5d0d67_002.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">tim</span>				<time>July 10, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1501#respond" onclick='return addComment.moveForm("comment-1501", "1501", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Thank you but that doesn’t work. Started the session at the top of the page and echo’d what you pasted. Just doesn’t show up.</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+	<li class="comment odd alt thread-even depth-1" id="li-comment-1547">
+		<div id="comment-1547" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-6643c3d21289a46f049e65966d5d7cb8-0" scale="2" src-orig="http://0.gravatar.com/avatar/6643c3d21289a46f049e65966d5d7cb8?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/6643c3d21289a46f049e65966d5d7cb8.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://jamacx.com/" rel="external nofollow" class="url">dave</a></span>				<time>August 14, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1547#respond" onclick='return addComment.moveForm("comment-1547", "1547", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>When i run this in wamp the code runs fine but when i run it on my server live it returns a blank page instead. any ideas why?</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor even depth-2" id="li-comment-1548">
+		<div id="comment-1548" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-6" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">agurchand</span>				<time>August 14, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1548#respond" onclick='return addComment.moveForm("comment-1548", "1548", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Hi Dave, There is no special function used in this code. Have you tried any other php script in your server?. Is that working?.</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1552">
+		<div id="comment-1552" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-f7a21339836cc3d6d79445a5a56bb3cd-0" scale="2" src-orig="http://1.gravatar.com/avatar/f7a21339836cc3d6d79445a5a56bb3cd?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/f7a21339836cc3d6d79445a5a56bb3cd.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://www.dstar.in/" rel="external nofollow" class="url">DHANNA SINGH</a></span>				<time>August 17, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1552#respond" onclick='return addComment.moveForm("comment-1552", "1552", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>your are genius my dear.<br>
+tnx.U too much.</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment even thread-even depth-1" id="li-comment-1574">
+		<div id="comment-1574" style="position:relative;">
+			<div class="comment-author vcard">
+				<img scale="2" src-orig="http://0.gravatar.com/avatar/c8cccdc4fae1068e04353d1e66de92ab?s=70&amp;d=&amp;r=G" originals="70" id="grav-c8cccdc4fae1068e04353d1e66de92ab-0" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/c8cccdc4fae1068e04353d1e66de92ab.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://fakexsms.jublo.com/" rel="external nofollow" class="url">itxboss</a></span>				<time>August 20, 2013</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1574#respond" onclick='return addComment.moveForm("comment-1574", "1574", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Hi Please let me know how to use more than one User &amp; password</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+	<li class="comment odd alt thread-odd thread-alt depth-1" id="li-comment-1957">
+		<div id="comment-1957" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-da264cb5ddda40c711fd43a57b586f38-0" scale="2" src-orig="http://1.gravatar.com/avatar/da264cb5ddda40c711fd43a57b586f38?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/da264cb5ddda40c711fd43a57b586f38.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn">Gino Louwsma</span>				<time>April 20, 2014</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1957#respond" onclick='return addComment.moveForm("comment-1957", "1957", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Can you explain to me how to echo the username in another file? For example, at the admin panel.</p>
+			</div>
+		</div>
+	</li>
+<ul class="children">
+	<li class="comment byuser comment-author-agurchand bypostauthor even depth-2" id="li-comment-1959">
+		<div id="comment-1959" style="position:relative;">
+			<div class="comment-author vcard">
+				<img id="grav-8ca0bd9a7392e2615c30c4b2b3a67eb3-7" scale="2" src-orig="http://0.gravatar.com/avatar/8ca0bd9a7392e2615c30c4b2b3a67eb3?s=70&amp;d=&amp;r=G" originals="70" alt="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/8ca0bd9a7392e2615c30c4b2b3a67eb3.jpg" class="avatar avatar-70 photo grav-hashed grav-hijack" height="70" width="70">				<div class="comment-metadata">
+				<span class="fn"><a href="http://www.agurchand.com/" rel="external nofollow" class="url">Agurchand Babu</a></span>				<time>April 20, 2014</time>
+				<span class="comment-meta">
+									</span>
+				<span class="reply">
+					<a class="comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/?replytocom=1959#respond" onclick='return addComment.moveForm("comment-1959", "1959", "respond", "419")' rel="nofollow">Reply</a>				</span>
+				</div>
+			</div>
+						<div class="commentmetadata">
+				<p>Hi, Store the username in a session<br>
+$_SESSION['uname'] = $_REQUEST['uname']; (in this example may be after line no 11)</p>
+<p>echo this $_SESSION['uname'] wherever you want.</p>
+			</div>
+		</div>
+	</li>
+<!-- #comment-## -->
+</ul><!-- .children -->
+<!-- #comment-## -->
+			<div class="navigation bottomnav">
+				<div class="alignleft"></div>
+				<div class="alignright"></div>
+			</div>
+		</ol>
+	</div>
+	<div class="bordersperator2"></div>
+	<div id="commentsAdd">
+		<div id="respond" class="box m-t-6">
+								
+		<div id="respond" class="comment-respond">
+			<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blog.theonlytutorials.com/simple-php-login-script-using-session/#respond" style="display:none;">Cancel reply</a></small></h3>
+			<div id="commentform" class="comment-form">
+				<iframe src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/a.xhtml" allowtransparency="false" style="width:100%; height: 430px;border:0px;" name="jetpack_remote_comment" id="jetpack_remote_comment" frameborder="0" scrolling="no"></iframe>
+			</div>
+		</div>
+
+		
+		<input name="comment_parent" id="comment_parent" value="" type="hidden">
+
+				</div>
+	</div>
+					</article>
+		<!-- End Article -->
+		<!-- Start Sidebar -->
+		<aside class="sidebar c-4-12">
+	<div id="sidebars" class="sidebar">
+			<div class="sidebar_list">
+				<li id="search-3" class="widget widget-sidebar widget_search"><h3>Search the site</h3><form method="get" id="searchform" class="search-form" action="http://blog.theonlytutorials.com" _lpchecked="1">
+	<fieldset>
+		<input name="s" id="s" value="Search the site" onblur="if (this.value == '') {this.value = 'Search the site';}" onfocus="if (this.value == 'Search the site') {this.value = '';}" type="text">
+		<input id="search-image" class="sbutton" style="border:0; vertical-align: top;" value="Search" type="submit">
+	</fieldset>
+</form></li><li id="blog_subscription-3" class="widget widget-sidebar jetpack_subscription_widget"><h3><label for="subscribe-field">Subscribe to Blog via Email</label></h3>
+		<form action="" method="post" accept-charset="utf-8" id="subscribe-blog-blog_subscription-3">
+			<p id="subscribe-text">Enter your email address to subscribe to this blog and receive notifications of new posts by email.</p>
+			<p id="subscribe-email"><input name="email" value="Email Address" id="subscribe-field" onclick="if ( this.value == 'Email Address' ) { this.value = ''; }" onblur="if ( this.value == '' ) { this.value = 'Email Address'; }" type="text"></p>
+
+			<p id="subscribe-submit">
+				<input name="action" value="subscribe" type="hidden">
+				<input name="source" value="http://blog.theonlytutorials.com/simple-php-login-script-using-session/" type="hidden">
+				<input name="sub-type" value="widget" type="hidden">
+				<input name="redirect_fragment" value="blog_subscription-3" type="hidden">
+								<input value="Subscribe" name="jetpack_subscriptions_widget" type="submit">
+			</p>
+		</form>
+
+		
+</li>		<li id="recent-posts-3" class="widget widget-sidebar widget_recent_entries">		<h3>Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://blog.theonlytutorials.com/export-form-data-excel-csv-php/">Export form data to Excel (CSV) in PHP</a>
+						</li>
+					<li>
+				<a href="http://blog.theonlytutorials.com/create-simple-wordpress-plugin-tutorial/">How to create a simple WordPress plugin</a>
+						</li>
+					<li>
+				<a href="http://blog.theonlytutorials.com/page-load-progress-bar-website-webpage/">Page load Progress bar for your website / webpage</a>
+						</li>
+					<li>
+				<a href="http://blog.theonlytutorials.com/face-detection-and-tagging-script-with-jquery/">Face detection and photo tagging script with jQuery!</a>
+						</li>
+					<li>
+				<a href="http://blog.theonlytutorials.com/highcharts-load-json-data-via-ajax-php/">Highcharts – load JSON data via Ajax and PHP!</a>
+						</li>
+				</ul>
+		</li>
+<!-- Quick Adsense Wordpress Plugin: http://quicksense.net/ -->
+<li id="adswidget1-quick-adsense" class="widget widget-sidebar �lambda_2">
+<script async="" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/adsbygoogle.js"></script>
+<!-- theonlytutorials_responsive -->
+<ins data-adsbygoogle-status="done" class="adsbygoogle" style="display: block; height: 600px;" data-ad-client="ca-pub-8524980424149892" data-ad-slot="5082647138" data-ad-format="auto"><ins style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:299px;background-color:transparent"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:299px;background-color:transparent"><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;" frameborder="0" height="600" scrolling="no" width="299"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</li><li id="facebook-likebox-3" class="widget widget-sidebar widget_facebook_likebox"><h3><a href="https://www.facebook.com/theonlytutorials">Facebook</a></h3><iframe src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/likebox.html" style="border: none; overflow: hidden; width: 300px;  height: 300px; background: #fff" frameborder="0" scrolling="no"></iframe></li><li id="text-3" class="widget widget-sidebar widget_text"><h3>Follow Me</h3>			<div data-twttr-id="twttr-sandbox-0" class="textwidget"><iframe title="Twitter Timeline" style="border: medium none; max-width: 100%; min-width: 180px;" class="twitter-timeline twitter-timeline-rendered" allowtransparency="true" id="twitter-widget-0" frameborder="0" height="300" scrolling="no" width="299"></iframe>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
+		</li><li id="text-4" class="widget widget-sidebar widget_text">			<div class="textwidget"><a rel="nofollow" href="http://www.addurl.nu/">addurl</a></div>
+		</li>			</div>
+	</div><!--sidebars-->
+</aside>		<!-- End Sidebar -->
+				</div><!--.content-->
+	</div><!--#page-->
+<footer>
+			<div class="carousel">
+			<h3 class="frontTitle"><div class="latest">PHP Tutorials</div></h3>
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/export-form-data-excel-csv-php/" title="Export form data to Excel (CSV) in PHP" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+																	<div class="featured-thumbnail">
+										<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/footerthumb.png" class="attachment-featured wp-post-image" alt="Export form data to Excel (CSV) in PHP">
+									</div>
+															</div>
+							<p class="footer-title">
+								<span class="featured-title">Export form data to Excel (CSV) in PHP</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/highcharts-load-json-data-via-ajax-php/" title="Highcharts – load JSON data via Ajax and PHP!" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+								 
+									<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/highcharts-ajax-php-140x130.png" class="attachment-carousel wp-post-image" alt="highcharts-ajax-php" title="" height="130" width="140">															</div>
+							<p class="footer-title">
+								<span class="featured-title">Highcharts – load JSON data via Ajax and PHP!</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/capture-web-camera-image-php-jquery/" title="Capture Webcam Image with PHP and jQuery!" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+								 
+									<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/web-cam-with-php-jquery-140x130.jpg" class="attachment-carousel wp-post-image" alt="web-cam-with-php-jquery" title="" height="130" width="140">															</div>
+							<p class="footer-title">
+								<span class="featured-title">Capture Webcam Image with PHP and jQuery!</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/jquery-ajax-login-signup-form-php-script/" title="jQuery Ajax Login and Signup form – PHP Script!" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+								 
+									<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/jquery-login1-140x130.png" class="attachment-carousel wp-post-image" alt="jquery-login" title="" height="130" width="140">															</div>
+							<p class="footer-title">
+								<span class="featured-title">jQuery Ajax Login and Signup form – PHP Script!</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/extract-email-addresses-webpage-php-script/" title="Extract Email addresses from a webpage – PHP Script!" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+								 
+									<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/email-extract-140x130.png" class="attachment-carousel wp-post-image" alt="email-extract" title="" height="130" width="140">															</div>
+							<p class="footer-title">
+								<span class="featured-title">Extract Email addresses from a webpage – PHP Script!</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+								<div class="excerpt">
+						<a href="http://blog.theonlytutorials.com/html-form-pdf-file-php-mpdf/" title="HTML form to PDF file using PHP and MPDF!" rel="nofollow" id="footer-thumbnail">
+							<div>
+								<div class="hover"><span class="icon-link"></span></div>
+								 
+									<img scale="0" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/html-pdf-140x130.png" class="attachment-carousel wp-post-image" alt="html-pdf" title="" height="130" width="140">															</div>
+							<p class="footer-title">
+								<span class="featured-title">HTML form to PDF file using PHP and MPDF!</span>
+							</p>
+						</a>
+					</div><!--.post excerpt-->                
+			 
+		</div>
+	</footer><!--footer-->
+<div class="copyrights"><!--start copyrights-->
+<div class="row" id="copyright-note">
+		<div class="copyright-left-text">Copyright © 2014 <a href="http://blog.theonlytutorials.com/" title="Find the Source code you want" rel="nofollow">TheOnlyTutorials.com</a>.</div>
+<div class="copyright-text"></div>
+<div class="footer-navigation">
+					<ul class="menu">
+				<li class="page_item page-item-877"><a href="http://blog.theonlytutorials.com/contact/">Contact</a></li>
+<li class="page_item page-item-873"><a href="http://blog.theonlytutorials.com/privacy-policy/">Privacy Policy</a></li>
+			</ul>
+		</div>
+<div class="top"><a href="#top" class="toplink">&nbsp;</a></div>
+</div>
+<!--end copyrights-->
+</div>
+	<div style="display:none">
+	<div class="grofile-hash-map-8ca0bd9a7392e2615c30c4b2b3a67eb3">
+	</div>
+	<div class="grofile-hash-map-f681090b58203916cfe418ca233ecebc">
+	</div>
+	<div class="grofile-hash-map-4c83d7c55b6f0a1bccac521fb78e6702">
+	</div>
+	<div class="grofile-hash-map-f733b91db1484cc5bbde797716186623">
+	</div>
+	<div class="grofile-hash-map-6340276046ffb0b0a2560bb8e4f97ded">
+	</div>
+	<div class="grofile-hash-map-631ab5ebb377922cf07dad885a025385">
+	</div>
+	<div class="grofile-hash-map-79173d6f52c4542b42bb29fe08220937">
+	</div>
+	<div class="grofile-hash-map-d417812c53690b24f57463d216f8e7b8">
+	</div>
+	<div class="grofile-hash-map-5fd8d34651dfe5ef314211ffbf5d0d67">
+	</div>
+	<div class="grofile-hash-map-6643c3d21289a46f049e65966d5d7cb8">
+	</div>
+	<div class="grofile-hash-map-f7a21339836cc3d6d79445a5a56bb3cd">
+	</div>
+	<div class="grofile-hash-map-c8cccdc4fae1068e04353d1e66de92ab">
+	</div>
+	<div class="grofile-hash-map-da264cb5ddda40c711fd43a57b586f38">
+	</div>
+	</div>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/shCore.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/shBrushPhp.js"></script>
+
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/blog.theonlytutorials.com\/simple-php-login-script-using-session\/":419}	</script>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-tumblr' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtumblr', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+		});
+		</script>
+							<script type="text/javascript">
+			jQuery(document).on('ready', function(){
+				jQuery('body').on('click', 'a.share-pinterest', function(e){
+					e.preventDefault();
+
+					// Load Pinterest Bookmarklet code
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = window.location.protocol + "//assets.pinterest.com/js/pinmarklet.js?r=" + ( Math.random() * 99999999 );
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+
+					// Trigger Stats
+					var s = document.createElement("script");
+					s.type = "text/javascript";
+					s.src = this + ( this.toString().indexOf( '?' ) ? '&' : '?' ) + 'js_only=1';
+					var x = document.getElementsByTagName("script")[0];
+					x.parentNode.insertBefore(s, x);
+				});
+			});
+			</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="/simple-php-login-script-using-session/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input name="target_email" id="target_email" type="email">
+
+			
+				<label for="source_name">Your Name</label>
+				<input name="source_name" id="source_name" type="text">
+
+				<label for="source_email">Your Email Address</label>
+				<input name="source_email" id="source_email" type="email">
+
+			
+			
+			<img scale="0" style="float: right; display: none" class="loading" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/loading.gif" alt="loading" height="16" width="16">
+			<input value="Send Email" class="sharing_send" type="submit">
+			<a href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript">//<![CDATA[
+SyntaxHighlighter.all();
+//]]></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/jquery_002.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/www.theonlytutorials.com\/wordpress\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ..."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/scripts.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/devicepx-jetpack.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/gprofiles.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/wpgroho.js"></script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/comment-reply.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var recaptcha_options = {"lang":"en"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/sharing.js"></script>
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		if ( 0 === window.location.hash.indexOf( '#comment-' ) ) {
+			// window.location.reload() doesn't respect the Hash in IE
+			window.location.hash = window.location.hash;
+		}
+		</script>
+		<![endif]-->
+		<script type="text/javascript">
+			var comm_par_el = document.getElementById( 'comment_parent' ),
+			    comm_par = (comm_par_el && comm_par_el.value) ? comm_par_el.value : '',
+			    frame = document.getElementById( 'jetpack_remote_comment' ),
+			    tellFrameNewParent;
+
+			tellFrameNewParent = function() {
+				if ( comm_par ) {
+					frame.src = "http://jetpack.wordpress.com/jetpack-comment/?blogid=34767810&postid=419&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=gravatar_default&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en-US&jetpack_version=2.9.3&sig=b4e8b654cc4c1cb2fe72433e3efabdae76f4fcb6#parent=http%3A%2F%2Fblog.theonlytutorials.com%2Fsimple-php-login-script-using-session%2F" + '&replytocom=' + parseInt( comm_par, 10 ).toString();
+				} else {
+					frame.src = "http://jetpack.wordpress.com/jetpack-comment/?blogid=34767810&postid=419&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=gravatar_default&greeting=Leave+a+Reply&greeting_reply=Leave+a+Reply+to+%25s&color_scheme=light&lang=en-US&jetpack_version=2.9.3&sig=b4e8b654cc4c1cb2fe72433e3efabdae76f4fcb6#parent=http%3A%2F%2Fblog.theonlytutorials.com%2Fsimple-php-login-script-using-session%2F";
+				}
+			};
+
+	
+			if ( 'undefined' !== typeof addComment ) {
+				addComment._Jetpack_moveForm = addComment.moveForm;
+
+				addComment.moveForm = function( commId, parentId, respondId, postId ) {
+					var returnValue = addComment._Jetpack_moveForm( commId, parentId, respondId, postId ), cancelClick, cancel;
+
+					if ( false === returnValue ) {
+						cancel = document.getElementById( 'cancel-comment-reply-link' );
+						cancelClick = cancel.onclick;
+						cancel.onclick = function() {
+							var cancelReturn = cancelClick.call( this );
+							if ( false !== cancelReturn ) {
+								return cancelReturn;
+							}
+
+							if ( !comm_par ) {
+								return cancelReturn;
+							}
+
+							comm_par = 0;
+
+							tellFrameNewParent();
+
+							return cancelReturn;
+						};
+					}
+
+					if ( comm_par == parentId ) {
+						return returnValue;
+					}
+
+					comm_par = parentId;
+
+					tellFrameNewParent();
+
+					return returnValue;
+				};
+			}
+
+	
+			if ( window.postMessage ) {
+				if ( document.addEventListener ) {
+					window.addEventListener( 'message', function( event ) {
+						if ( "http:\/\/jetpack.wordpress.com" !== event.origin ) {
+							return;
+						}
+
+						jQuery( frame ).height( event.data );
+					} );
+				} else if ( document.attachEvent ) {
+					window.attachEvent( 'message', function( event ) {
+						if ( "http:\/\/jetpack.wordpress.com" !== event.origin ) {
+							return;
+						}
+
+						jQuery( frame ).height( event.data );
+					} );
+				}
+			}
+		</script>
+
+	
+	<script src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/e-201417.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:2.9.3',blog:'34767810',post:'419',tz:'5.5'});
+	var load_cmc = function(){linktracker_init(34767810,419,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script><img scale="0" id="wpstats" src="Simple%20PHP%20Login%20Script%20using%20Session%20%7C%20TheOnlyTutorials.com_files/g.gif" alt=""></div><!--.main-container-->
+
+<iframe style="display: none;" allowtransparency="true" id="rufous-sandbox" frameborder="0" scrolling="no"></iframe></body></html>
